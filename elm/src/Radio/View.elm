@@ -19,14 +19,7 @@ view : Model -> Html Msg
 view model =
     div
         []
-        [ View.viewGlobalPlayer
-            FollowLink
-            TogglePlayback
-            Next
-            SeekTo
-            (Model.currentTrack model)
-            model.playing
-        , View.viewNavigation
+        [ View.viewNavigation
             FollowLink
             model.navigation
             model.currentPage
@@ -84,6 +77,13 @@ view model =
                 PageNotFound ->
                     div [] [ text "404" ]
             ]
+        , View.viewGlobalPlayer
+            FollowLink
+            TogglePlayback
+            Next
+            SeekTo
+            (Model.currentTrack model)
+            model.playing
         ]
 
 
