@@ -37,10 +37,9 @@
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
       function onYouTubeIframeAPIReady() {
-        var soundcloudClientId = "SOUNDCLOUD_CLIENT_ID";
         var app = Elm.Radio.Main.fullscreen();
 
-        app = initializePlayer(soundcloudClientId, app);
+        app = initializePlayer("cc1bf58dc4b00ed757ab2f76deaa3d70", app);
 
         app.ports.scroll.subscribe(function(offset) {
           window.scrollBy(0, offset);
