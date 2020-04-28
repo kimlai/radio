@@ -137,7 +137,20 @@ header {
   padding-bottom: var(--s4);
 }
 
-.queues .cover {
+.queue-tracks .cover img {
   width: var(--s3);
   height: var(--s3);
+}
+
+.queues .nav a {
+  text-decoration: none;
+}
+.queues .nav .active a {
+  text-decoration: underline;
+}
+.queue-tracks .artist {
+  font-size: var(--s-1);
+}
+ul.queue-tracks {
+  margin-top: var(--s4);
 }

@@ -160,16 +160,22 @@ viewRadioTrack track currentPlaylist =
 
 viewPlayedTracks : Page -> Tracklist -> List TrackId -> Html Msg
 viewPlayedTracks currentPage tracks playedTracks =
-    div
-        [ class "queues" ]
-        [ ul
-            [ class "nav" ]
-            [ li
-                [ classList [ ( "active", currentPage == UpNextPage ) ] ]
-                [ link FollowLink "/queue/next" [] [ text "Up Next" ] ]
-            , li
-                [ classList [ ( "active", currentPage == PlayedPage ) ] ]
-                [ link FollowLink "/queue/played" [] [ text "Played" ] ]
+    node "center-l"
+        [ attribute "max" "calc(var(--measure) * 0.65)" ]
+        [ div
+            [ class "queues" ]
+            [ node "cluster-l"
+                []
+                [ ul
+                    [ class "nav" ]
+                    [ li
+                        [ classList [ ( "active", currentPage == UpNextPage ) ] ]
+                        [ link FollowLink "/queue/next" [] [ text "Up Next" ] ]
+                    , li
+                        [ classList [ ( "active", currentPage == PlayedPage ) ] ]
+                        [ link FollowLink "/queue/played" [] [ text "Played" ] ]
+                    ]
+                ]
             ]
         , if List.isEmpty playedTracks then
             div
@@ -179,18 +185,10 @@ viewPlayedTracks currentPage tracks playedTracks =
                 ]
 
           else
-            table
-                [ class "played-tracks" ]
-                [ thead
-                    []
-                    [ th [] []
-                    , th [] []
-                    , th [] []
-                    , th [] [ text "Title" ]
-                    , th [] [ text "Artist" ]
-                    ]
-                , tbody
-                    []
+            ul
+                [ class "queue-tracks" ]
+                [ node "stack-l"
+                    [ attribute "space" "var(--s2)" ]
                     (Tracklist.getTracks playedTracks tracks |> List.map viewPlayedTrack)
                 ]
         ]
@@ -198,93 +196,79 @@ viewPlayedTracks currentPage tracks playedTracks =
 
 viewPlayedTrack : Track -> Html Msg
 viewPlayedTrack track =
-    tr
-        []
-        [ td
-            []
-            [ div
-                [ class "play"
-                , onClick (PlayOutsidePlaylist track.id)
-                ]
-                [ Icons.play ]
-            ]
-        , td
-            []
-            []
-        , td
-            []
-            [ div
-                [ class "cover" ]
-                [ img
-                    [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url)
-                    , alt ""
+    li
+        [ onClick (PlayOutsidePlaylist track.id)
+        ]
+        [ node "sidebar-l"
+            [ attribute "space" "var(--s0)" ]
+            [ div []
+                [ div
+                    [ class "cover" ]
+                    [ img
+                        [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url)
+                        , alt ""
+                        ]
+                        []
                     ]
-                    []
+                , div []
+                    [ div [ class "title" ] [ text track.title ]
+                    , div [ class "artist" ] [ text track.artist ]
+                    ]
                 ]
             ]
-        , td [] [ div [ class "title" ] [ text track.title ] ]
-        , td [] [ div [ class "artist" ] [ text track.artist ] ]
         ]
 
 
 viewUpcomingTracks : Page -> Tracklist -> PlaylistId -> List ( Int, TrackId ) -> Html Msg
 viewUpcomingTracks currentPage tracks playlistId upcomingTracks =
-    div
-        [ class "queues" ]
-        [ ul
-            [ class "nav" ]
-            [ li
-                [ classList [ ( "active", currentPage == UpNextPage ) ] ]
-                [ link FollowLink "/queue/next" [] [ text "Up Next" ] ]
-            , li
-                [ classList [ ( "active", currentPage == PlayedPage ) ] ]
-                [ link FollowLink "/queue/played" [] [ text "Played" ] ]
-            ]
-        , table
-            [ class "played-tracks" ]
-            [ thead
+    node "center-l"
+        [ attribute "max" "calc(var(--measure) * 0.65)" ]
+        [ div
+            [ class "queues" ]
+            [ node "cluster-l"
                 []
-                [ th [] []
-                , th [] []
-                , th [] []
-                , th [] [ text "Title" ]
-                , th [] [ text "Artist" ]
+                [ ul
+                    [ class "nav" ]
+                    [ li
+                        [ classList [ ( "active", currentPage == UpNextPage ) ] ]
+                        [ link FollowLink "/queue/next" [] [ text "Up Next" ] ]
+                    , li
+                        [ classList [ ( "active", currentPage == PlayedPage ) ] ]
+                        [ link FollowLink "/queue/played" [] [ text "Played" ] ]
+                    ]
                 ]
-            , tbody
-                []
-                (Tracklist.getTracksWithPosition upcomingTracks tracks |> List.map (viewUpcomingTrack playlistId))
+            , ul
+                [ class "queue-tracks" ]
+                [ node "stack-l"
+                    [ attribute "space" "var(--s2)" ]
+                    (Tracklist.getTracksWithPosition upcomingTracks tracks |> List.map (viewUpcomingTrack playlistId))
+                ]
             ]
         ]
 
 
 viewUpcomingTrack : PlaylistId -> ( Int, Track ) -> Html Msg
 viewUpcomingTrack playlistId ( position, track ) =
-    tr
-        []
-        [ td
-            []
-            [ div
-                [ class "play"
-                , onClick (PlayFromPlaylist playlistId position)
-                ]
-                [ Icons.play ]
-            ]
-        , td
-            []
-            []
-        , td
-            []
-            [ div
-                [ class "cover" ]
-                [ img
-                    [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url)
-                    , alt ""
+    li
+        [ onClick (PlayFromPlaylist playlistId position)
+        ]
+        [ node "sidebar-l"
+            [ attribute "space" "var(--s0)" ]
+            [ div []
+                [ div
+                    [ class "cover" ]
+                    [ img
+                        [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url)
+                        , alt ""
+                        ]
+                        []
                     ]
-                    []
+                , div []
+                    [ div [ class "title" ] [ text track.title ]
+                    , div [ class "artist" ] [ text track.artist ]
+                    ]
                 ]
             ]
-        , td [] [ div [ class "title" ] [ text track.title ] ]
-        , td [] [ div [ class "artist" ] [ text track.artist ] ]
         ]
 
 
