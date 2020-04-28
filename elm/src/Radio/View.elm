@@ -96,6 +96,7 @@ view model =
                 SeekTo
                 (Model.currentTrack model)
                 model.playing
+                (Player.currentPlaylist model.player == Just Radio && model.currentPage == RadioPage)
             ]
         ]
 

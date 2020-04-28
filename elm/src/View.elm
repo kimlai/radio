@@ -18,8 +18,9 @@ viewGlobalPlayer :
     -> (Float -> msg)
     -> Maybe Track
     -> Bool
+    -> Bool
     -> Html msg
-viewGlobalPlayer followLink tooglePlayback next seekTo track playing =
+viewGlobalPlayer followLink tooglePlayback next seekTo track playing hideTrack =
     case track of
         Nothing ->
             text ""
@@ -58,21 +59,25 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing =
                             , onClick next
                             ]
                             [ Icons.next ]
-                        , div [ class "track" ]
-                            [ div [ class "cover" ]
-                                [ img
-                                    [ src track.artwork_url, alt "" ]
-                                    []
-                                ]
-                            , div
-                                [ class "track-info" ]
-                                [ node "stack-l"
-                                    [ attribute "space" "var(--s-2)" ]
-                                    [ div [ class "title" ] [ text track.title ]
-                                    , div [ class "artist" ] [ text ("by " ++ track.artist) ]
+                        , if hideTrack then
+                            div [] []
+
+                          else
+                            div [ class "track" ]
+                                [ div [ class "cover" ]
+                                    [ img
+                                        [ src track.artwork_url, alt "" ]
+                                        []
+                                    ]
+                                , div
+                                    [ class "track-info" ]
+                                    [ node "stack-l"
+                                        [ attribute "space" "var(--s-2)" ]
+                                        [ div [ class "title" ] [ text track.title ]
+                                        , div [ class "artist" ] [ text ("by " ++ track.artist) ]
+                                        ]
                                     ]
                                 ]
-                            ]
                         ]
                     ]
                 ]
