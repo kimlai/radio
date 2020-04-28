@@ -1,8 +1,0 @@
-var _user$project$Radio_LikesView$view = A2(
-	_elm_lang$html$Html$div,
-	{ctor: '[]'},
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html$text('Likes'),
-		_1: {ctor: '[]'}
-	});

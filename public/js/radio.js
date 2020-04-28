@@ -14258,125 +14258,125 @@ var _user$project$Radio_View$view = function (model) {
 		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: A6(
-				_user$project$View$viewGlobalPlayer,
+			_0: A4(
+				_user$project$View$viewNavigation,
 				_user$project$Radio_Update$FollowLink,
-				_user$project$Radio_Update$TogglePlayback,
-				_user$project$Radio_Update$Next,
-				_user$project$Radio_Update$SeekTo,
-				_user$project$Radio_Model$currentTrack(model),
-				model.playing),
+				model.navigation,
+				model.currentPage,
+				_user$project$Player$currentPlaylist(model.player)),
 			_1: {
 				ctor: '::',
-				_0: A4(
-					_user$project$View$viewNavigation,
-					_user$project$Radio_Update$FollowLink,
-					model.navigation,
-					model.currentPage,
-					_user$project$Player$currentPlaylist(model.player)),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$classList(
-								{
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'radio-playlist-overlay', _1: true},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'visible', _1: model.showRadioPlaylist},
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(_user$project$Radio_Update$ToggleRadioPlaylist),
-								_1: {ctor: '[]'}
-							}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(''),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
 						ctor: '::',
-						_0: A4(
-							_user$project$Radio_View$viewRadioPlaylist,
-							model.showRadioPlaylist,
-							_user$project$Player$currentTrack(model.player),
-							model.tracks,
-							A2(_user$project$Player$playlistContent, _user$project$Radio_Model$Radio, model.player)),
+						_0: _elm_lang$html$Html_Attributes$classList(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'radio-playlist-overlay', _1: true},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'visible', _1: model.showRadioPlaylist},
+									_1: {ctor: '[]'}
+								}
+							}),
 						_1: {
 							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('main'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: function () {
-										var _p13 = model.currentPage;
-										switch (_p13.ctor) {
-											case 'RadioPage':
-												var currentRadioTrack = A2(
-													_elm_lang$core$Maybe$andThen,
-													A2(_elm_lang$core$Basics$flip, _user$project$Tracklist$get, model.tracks),
-													A2(_user$project$Player$currentTrackOfPlaylist, _user$project$Radio_Model$Radio, model.player));
-												return A2(
-													_elm_lang$html$Html$div,
-													{ctor: '[]'},
-													{
-														ctor: '::',
-														_0: A2(
-															_user$project$Radio_View$viewRadioTrack,
-															currentRadioTrack,
-															_user$project$Player$currentPlaylist(model.player)),
-														_1: {ctor: '[]'}
-													});
-											case 'PlayedPage':
-												return A3(
-													_user$project$Radio_View$viewPlayedTracks,
-													model.currentPage,
-													model.tracks,
-													A2(_elm_lang$core$List$drop, 1, model.played));
-											case 'UpNextPage':
-												var playlist = A2(
-													_elm_lang$core$Maybe$withDefault,
-													_user$project$Radio_Model$Radio,
-													_user$project$Player$currentPlaylist(model.player));
-												return A4(
-													_user$project$Radio_View$viewUpcomingTracks,
-													model.currentPage,
-													model.tracks,
-													playlist,
-													A2(_user$project$Player$upcoming, playlist, model.player));
-											case 'LatestTracksPage':
-												return A5(
-													_user$project$Radio_View$viewLatestTracks,
-													_user$project$Player$currentTrack(model.player),
-													model.currentTime,
-													model.tracks,
-													model.latestTracks,
-													A2(_user$project$Player$playlistContent, _user$project$Radio_Model$LatestTracks, model.player));
-											default:
-												return A2(
-													_elm_lang$html$Html$div,
-													{ctor: '[]'},
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html$text('404'),
-														_1: {ctor: '[]'}
-													});
-										}
-									}(),
-									_1: {ctor: '[]'}
-								}),
+							_0: _elm_lang$html$Html_Events$onClick(_user$project$Radio_Update$ToggleRadioPlaylist),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(''),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A4(
+						_user$project$Radio_View$viewRadioPlaylist,
+						model.showRadioPlaylist,
+						_user$project$Player$currentTrack(model.player),
+						model.tracks,
+						A2(_user$project$Player$playlistContent, _user$project$Radio_Model$Radio, model.player)),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('main'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: function () {
+									var _p13 = model.currentPage;
+									switch (_p13.ctor) {
+										case 'RadioPage':
+											var currentRadioTrack = A2(
+												_elm_lang$core$Maybe$andThen,
+												A2(_elm_lang$core$Basics$flip, _user$project$Tracklist$get, model.tracks),
+												A2(_user$project$Player$currentTrackOfPlaylist, _user$project$Radio_Model$Radio, model.player));
+											return A2(
+												_elm_lang$html$Html$div,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: A2(
+														_user$project$Radio_View$viewRadioTrack,
+														currentRadioTrack,
+														_user$project$Player$currentPlaylist(model.player)),
+													_1: {ctor: '[]'}
+												});
+										case 'PlayedPage':
+											return A3(
+												_user$project$Radio_View$viewPlayedTracks,
+												model.currentPage,
+												model.tracks,
+												A2(_elm_lang$core$List$drop, 1, model.played));
+										case 'UpNextPage':
+											var playlist = A2(
+												_elm_lang$core$Maybe$withDefault,
+												_user$project$Radio_Model$Radio,
+												_user$project$Player$currentPlaylist(model.player));
+											return A4(
+												_user$project$Radio_View$viewUpcomingTracks,
+												model.currentPage,
+												model.tracks,
+												playlist,
+												A2(_user$project$Player$upcoming, playlist, model.player));
+										case 'LatestTracksPage':
+											return A5(
+												_user$project$Radio_View$viewLatestTracks,
+												_user$project$Player$currentTrack(model.player),
+												model.currentTime,
+												model.tracks,
+												model.latestTracks,
+												A2(_user$project$Player$playlistContent, _user$project$Radio_Model$LatestTracks, model.player));
+										default:
+											return A2(
+												_elm_lang$html$Html$div,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('404'),
+													_1: {ctor: '[]'}
+												});
+									}
+								}(),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A6(
+								_user$project$View$viewGlobalPlayer,
+								_user$project$Radio_Update$FollowLink,
+								_user$project$Radio_Update$TogglePlayback,
+								_user$project$Radio_Update$Next,
+								_user$project$Radio_Update$SeekTo,
+								_user$project$Radio_Model$currentTrack(model),
+								model.playing),
 							_1: {ctor: '[]'}
 						}
 					}
