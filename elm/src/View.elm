@@ -60,7 +60,7 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing hideTrack =
                             ]
                             [ Icons.next ]
                         , if hideTrack then
-                            div [] []
+                            text ""
 
                           else
                             div [ class "track" ]
