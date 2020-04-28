@@ -19,6 +19,10 @@
   --line-height-small: calc(0.8 * var(--ratio));
 }
 
+button {
+  cursor: pointer;
+}
+
 h1 {
   font-size: calc(var(--s1) + 1.4vw);
   line-height: var(--line-height-small);
@@ -60,6 +64,19 @@ header {
   line-height: var(--line-height-small);
 }
 
+.radio-track .resume-radio {
+  background: black;
+  color: white;
+  padding: var(--s0) var(--s2);
+  font-size: var(--s1);
+  font-weight: 700;
+}
+
+.radio-track.inactive .radio-cover,
+.radio-track.inactive .track-info {
+  opacity: 0.5;
+}
+
 .global-player {
   background: white;
   position: sticky;
@@ -77,9 +94,16 @@ header {
   width: var(--s1);
 }
 
-.global-player img {
+.global-player .cover {
   width: var(--s4);
-  height: var(--s4);
+  max-height: var(--s4);
+}
+.global-player .track {
+  display: flex;
+  align-items: center;
+}
+.global-player .track-info {
+  padding: 0 var(--s-2);
 }
 .global-player .title {
   line-height: var(--line-height-small);

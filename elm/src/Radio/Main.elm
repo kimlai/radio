@@ -54,7 +54,7 @@ init location =
             Update.update (NavigateTo (route location))
 
         initializeRadio =
-            Http.send (FetchedMore Radio (RadioPage == route location)) (Api.fetchPlaylist "/public/json/playlist.json" Api.decodeTrack)
+            Http.send (FetchedMore Radio False) (Api.fetchPlaylist "/public/json/playlist.json" Api.decodeTrack)
 
         fetchLatestTracks =
             Update.update (FetchMore LatestTracks False)

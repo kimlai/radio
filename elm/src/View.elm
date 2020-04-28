@@ -58,16 +58,16 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing =
                             , onClick next
                             ]
                             [ Icons.next ]
-                        , node "sidebar-l"
-                            []
-                            [ div []
-                                [ div [ class "cover" ]
-                                    [ img
-                                        [ src track.artwork_url, alt "" ]
-                                        []
-                                    ]
-                                , div
-                                    [ class "track-info" ]
+                        , div [ class "track" ]
+                            [ div [ class "cover" ]
+                                [ img
+                                    [ src track.artwork_url, alt "" ]
+                                    []
+                                ]
+                            , div
+                                [ class "track-info" ]
+                                [ node "stack-l"
+                                    [ attribute "space" "var(--s-2)" ]
                                     [ div [ class "title" ] [ text track.title ]
                                     , div [ class "artist" ] [ text ("by " ++ track.artist) ]
                                     ]
