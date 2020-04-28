@@ -411,8 +411,11 @@ viewTrackPlaceHolder =
 
 viewMoreButton : PlaylistId -> Html Msg
 viewMoreButton playlistId =
-    div
-        [ class "view-more"
-        , onClick (FetchMore playlistId False)
+    node "center-l"
+        [ attribute "intrinsic" "true" ]
+        [ button
+            [ class "view-more"
+            , onClick (FetchMore playlistId False)
+            ]
+            [ text "Load more tracks" ]
         ]
-        [ text "More" ]

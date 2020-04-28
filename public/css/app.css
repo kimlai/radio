@@ -183,3 +183,10 @@ header {
 ul.queue-tracks {
   margin-top: var(--s4);
 }
+
+.view-more {
+  background: black;
+  color: white;
+  padding: var(--s-1) var(--s1);
+  font-weight: 700;
+}
