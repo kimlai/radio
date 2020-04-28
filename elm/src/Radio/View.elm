@@ -331,15 +331,12 @@ viewLatestTracks currentTrackId currentTime tracks playlist playlistContent =
         tracksView =
             List.indexedMap (viewTrack currentTrackId currentTime playlist.id) playlistTracks
     in
-    div
-        [ class "latest-tracks" ]
-        [ node "cluster-l"
-            [ attribute "align" "start", attribute "space" "var(--s3)" ]
-            [ div
-                [ class "content" ]
-                (List.append tracksView placeholders)
-            , moreButton
-            ]
+    node "stack-l"
+        [ attribute "space" "var(--s4)" ]
+        [ ul
+            [ class "latest-tracks" ]
+            (List.append tracksView placeholders)
+        , moreButton
         ]
 
 
@@ -354,7 +351,7 @@ viewTrack currentTrackId currentTime playlistId position track =
                 Youtube id ->
                     "Youtube"
     in
-    div
+    li
         [ classList
             [ ( "latest-track", True )
             , ( "error", track.error )

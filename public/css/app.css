@@ -20,7 +20,7 @@
 }
 
 button {
-  cursor: pointer;
+  border: none;
 }
 
 h1 {
@@ -130,11 +130,11 @@ header {
   background: black;
 }
 
-.latest-tracks {
+ul.latest-tracks {
   padding-top: var(--s2);
-}
-.latest-track {
-  width: 250px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--s7), 1fr));
+  grid-gap: var(--s3);
 }
 .latest-track .track-info {
   padding: var(--s-2);
@@ -151,20 +151,11 @@ header {
 }
 .latest-tracks img {
   filter: grayscale(0.5);
-  width: 250px;
-  height: 250px;
+  width: 100%;
 }
 .latest-tracks img:hover {
   filter: grayscale(0) brightness(1.2);
   cursor: pointer;
-}
-
-.latest-tracks .view-more {
-  margin-top: var(--s4);
-}
-
-.latest-tracks {
-  padding-bottom: var(--s4);
 }
 
 .queue-tracks .cover img {
