@@ -40,7 +40,7 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing =
                 [ class "global-player" ]
                 [ viewProgressBar seekTo track
                 , node "cluster-l"
-                    [ attribute "space" "0px" ]
+                    []
                     [ div
                         [ class "controls" ]
                         [ viewShowRadioPlaylistToggle followLink
@@ -58,15 +58,20 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing =
                             , onClick next
                             ]
                             [ Icons.next ]
-                        , div [ class "cover" ]
-                            [ img
-                                [ src track.artwork_url, alt "" ]
-                                []
-                            ]
-                        , div
-                            [ class "track-info" ]
-                            [ div [ class "title" ] [ text track.title ]
-                            , div [ class "artist" ] [ text ("by " ++ track.artist) ]
+                        , node "sidebar-l"
+                            []
+                            [ div []
+                                [ div [ class "cover" ]
+                                    [ img
+                                        [ src track.artwork_url, alt "" ]
+                                        []
+                                    ]
+                                , div
+                                    [ class "track-info" ]
+                                    [ div [ class "title" ] [ text track.title ]
+                                    , div [ class "artist" ] [ text ("by " ++ track.artist) ]
+                                    ]
+                                ]
                             ]
                         ]
                     ]

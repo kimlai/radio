@@ -49,7 +49,7 @@ view model =
             , div
                 [ class "main" ]
                 [ node "center-l"
-                    []
+                    [ attribute "gutters" "var(--s0)" ]
                     [ case model.currentPage of
                         RadioPage ->
                             let
