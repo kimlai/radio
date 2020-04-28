@@ -76,6 +76,7 @@ header {
 .radio-track.inactive .radio-cover,
 .radio-track.inactive .track-info {
   opacity: 0.5;
+  filter: blur(5px);
 }
 
 .global-player {
