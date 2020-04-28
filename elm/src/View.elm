@@ -1,6 +1,6 @@
 module View exposing (..)
 
-import Html exposing (Html, a, div, img, li, nav, text, ul)
+import Html exposing (Html, a, div, img, li, nav, node, text, ul)
 import Html.Attributes exposing (..)
 import Html.Events exposing (on, onClick, onWithOptions)
 import Html.Extra exposing (link)
@@ -38,33 +38,38 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing =
             in
             div
                 [ class "global-player" ]
-                [ div
-                    [ class "controls" ]
-                    [ viewShowRadioPlaylistToggle followLink
-                    , div
-                        [ classList
-                            [ ( "playback-button", True )
-                            , ( "playing", playing && not track.error )
-                            , ( "error", track.error )
+                [ node "cluster-l"
+                    [ attribute "space" "0px" ]
+                    [ div
+                        [ class "controls" ]
+                        [ viewShowRadioPlaylistToggle followLink
+                        , div
+                            [ classList
+                                [ ( "playback-button", True )
+                                , ( "playing", playing && not track.error )
+                                , ( "error", track.error )
+                                ]
+                            , onClick tooglePlayback
                             ]
-                        , onClick tooglePlayback
+                            [ icon ]
+                        , div
+                            [ class "next-button"
+                            , onClick next
+                            ]
+                            [ Icons.next ]
+                        , div [ class "cover" ]
+                            [ img
+                                [ src track.artwork_url, alt "" ]
+                                []
+                            ]
+                        , div
+                            [ class "track-info" ]
+                            [ div [ class "title" ] [ text track.title ]
+                            , div [ class "artist" ] [ text ("by " ++ track.artist) ]
+                            ]
+                        , viewProgressBar seekTo track
                         ]
-                        [ icon ]
-                    , div
-                        [ class "next-button"
-                        , onClick next
-                        ]
-                        [ Icons.next ]
                     ]
-                , img
-                    [ src track.artwork_url, alt "" ]
-                    []
-                , div
-                    [ class "track-info" ]
-                    [ div [ class "title" ] [ text track.title ]
-                    , div [ class "artist" ] [ text ("by " ++ track.artist) ]
-                    ]
-                , viewProgressBar seekTo track
                 ]
 
 
@@ -159,11 +164,18 @@ decodeElement =
 
 viewNavigation : (String -> msg) -> List (NavigationItem page playlist) -> page -> Maybe playlist -> Html msg
 viewNavigation followLink navigationItems currentPage currentPlaylist =
-    navigationItems
-        |> List.map (viewNavigationItem followLink currentPage currentPlaylist)
-        |> ul []
-        |> List.repeat 1
-        |> nav [ class "navigation" ]
+    nav
+        []
+        [ node "cluster-l"
+            [ attribute "space" "0px" ]
+            [ ul
+                [ class "navigation" ]
+                (List.map
+                    (viewNavigationItem followLink currentPage currentPlaylist)
+                    navigationItems
+                )
+            ]
+        ]
 
 
 viewNavigationItem : (String -> msg) -> page -> Maybe playlist -> NavigationItem page playlist -> Html msg

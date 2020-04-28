@@ -15,62 +15,88 @@ import Tracklist exposing (Tracklist)
 import View
 
 
+bodyClass page =
+    case page of
+        RadioPage ->
+            "body-radio"
+
+        PlayedPage ->
+            "body-played"
+
+        UpNextPage ->
+            "body-up-next"
+
+        LatestTracksPage ->
+            "body-latest-tracks"
+
+        PageNotFound ->
+            "body-not-found"
+
+
 view : Model -> Html Msg
 view model =
-    div
-        []
-        [ View.viewNavigation
-            FollowLink
-            model.navigation
-            model.currentPage
-            (Player.currentPlaylist model.player)
-        , div
-            [ class "main" ]
-            [ case model.currentPage of
-                RadioPage ->
-                    let
-                        currentRadioTrack =
-                            Player.currentTrackOfPlaylist Radio model.player
-                                |> Maybe.andThen (flip Tracklist.get model.tracks)
-                    in
-                    div [] [ viewRadioTrack currentRadioTrack (Player.currentPlaylist model.player) ]
+    div [ class (bodyClass model.currentPage) ]
+        [ node
+            "cover-l"
+            [ attribute "centered" ".main", attribute "noPad" "true" ]
+            [ header []
+                [ View.viewNavigation
+                    FollowLink
+                    model.navigation
+                    model.currentPage
+                    (Player.currentPlaylist model.player)
+                ]
+            , div
+                [ class "main" ]
+                [ node "center-l"
+                    []
+                    [ case model.currentPage of
+                        RadioPage ->
+                            let
+                                currentRadioTrack =
+                                    Player.currentTrackOfPlaylist Radio model.player
+                                        |> Maybe.andThen (flip Tracklist.get model.tracks)
+                            in
+                            div [] [ viewRadioTrack currentRadioTrack (Player.currentPlaylist model.player) ]
 
-                PlayedPage ->
-                    viewPlayedTracks model.currentPage model.tracks (List.drop 1 model.played)
+                        PlayedPage ->
+                            viewPlayedTracks model.currentPage model.tracks (List.drop 1 model.played)
 
-                UpNextPage ->
-                    let
-                        playlist =
-                            Player.currentPlaylist model.player
-                                |> Maybe.withDefault Radio
-                    in
-                    viewUpcomingTracks
-                        model.currentPage
-                        model.tracks
-                        playlist
-                        (Player.upcoming
-                            playlist
-                            model.player
-                        )
+                        UpNextPage ->
+                            let
+                                playlist =
+                                    Player.currentPlaylist model.player
+                                        |> Maybe.withDefault Radio
+                            in
+                            viewUpcomingTracks
+                                model.currentPage
+                                model.tracks
+                                playlist
+                                (Player.upcoming
+                                    playlist
+                                    model.player
+                                )
 
-                LatestTracksPage ->
-                    viewLatestTracks
-                        (Player.currentTrack model.player)
-                        model.currentTime
-                        model.tracks
-                        model.latestTracks
-                        (Player.playlistContent LatestTracks model.player)
+                        LatestTracksPage ->
+                            viewLatestTracks
+                                (Player.currentTrack model.player)
+                                model.currentTime
+                                model.tracks
+                                model.latestTracks
+                                (Player.playlistContent LatestTracks model.player)
 
-                PageNotFound ->
-                    div [] [ text "404" ]
+                        PageNotFound ->
+                            div [] [ text "404" ]
+                    ]
+                ]
+            , View.viewGlobalPlayer
+                FollowLink
+                TogglePlayback
+                Next
+                SeekTo
+                (Model.currentTrack model)
+                model.playing
             ]
-        , View.viewGlobalPlayer
-            FollowLink
-            TogglePlayback
-            Next
-            SeekTo
-            (Model.currentTrack model)
-            model.playing
         ]
 
 
@@ -90,41 +116,43 @@ viewRadioTrack track currentPlaylist =
                         Youtube id ->
                             "Youtube"
             in
-            div
-                [ class "radio-track" ]
+            node "sidebar-l"
+                []
                 [ div
-                    [ class "radio-cover" ]
-                    [ img
-                        [ class "cover"
-                        , src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t500x500") track.artwork_url)
-                        , alt ""
-                        ]
-                        []
-                    ]
-                , div
-                    [ class "track-info-wrapper" ]
+                    [ class "radio-track" ]
                     [ div
-                        [ class "track-info" ]
-                        [ div [ class "title" ] [ text track.title ]
-                        , div [ class "artist" ] [ text ("by " ++ track.artist) ]
-                        , div
-                            [ class "source" ]
-                            [ span [] [ text "on " ]
-                            , a
-                                [ href track.sourceUrl
-                                , target "_blank"
-                                ]
-                                [ text source ]
+                        [ class "radio-cover" ]
+                        [ img
+                            [ class "cover"
+                            , src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t500x500") track.artwork_url)
+                            , alt ""
                             ]
-                        , if currentPlaylist /= Just Radio then
-                            div
-                                [ class "resume-radio"
-                                , onClick ResumeRadio
+                            []
+                        ]
+                    , div [ class "track-info" ]
+                        [ node "stack-l"
+                            []
+                            [ h1 [ class "title" ] [ text track.title ]
+                            , div [ class "artist" ] [ text ("by " ++ track.artist) ]
+                            , div
+                                [ class "source" ]
+                                [ span [] [ text "on " ]
+                                , a
+                                    [ href track.sourceUrl
+                                    , target "_blank"
+                                    ]
+                                    [ text source ]
                                 ]
-                                [ text "Resume Radio" ]
+                            , if currentPlaylist /= Just Radio then
+                                div
+                                    [ class "resume-radio"
+                                    , onClick ResumeRadio
+                                    ]
+                                    [ text "Resume Radio" ]
 
-                          else
-                            div [] []
+                              else
+                                div [] []
+                            ]
                         ]
                     ]
                 ]
@@ -315,10 +343,13 @@ viewLatestTracks currentTrackId currentTime tracks playlist playlistContent =
     in
     div
         [ class "latest-tracks" ]
-        [ div
-            [ class "content" ]
-            (List.append tracksView placeholders)
-        , moreButton
+        [ node "cluster-l"
+            [ attribute "align" "start", attribute "space" "var(--s3)" ]
+            [ div
+                [ class "content" ]
+                (List.append tracksView placeholders)
+            , moreButton
+            ]
         ]
 
 

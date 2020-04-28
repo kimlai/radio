@@ -1,0 +1,113 @@
+:root {
+  --ratio: 1.4;
+  --measure: 90ch;
+  --s-4: calc(var(--s-3) / var(--ratio));
+  --s-3: calc(var(--s-2) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+  --s-1: calc(var(--s0) / var(--ratio));
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s4: calc(var(--s3) * var(--ratio));
+  --s5: calc(var(--s4) * var(--ratio));
+  --s6: calc(var(--s5) * var(--ratio));
+  --s7: calc(var(--s6) * var(--ratio));
+  --s8: calc(var(--s7) * var(--ratio));
+  font-size: calc(0.33vw + 1em);
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  --line-height-small: calc(0.8 * var(--ratio));
+}
+
+h1 {
+  font-size: calc(var(--s1) + 1.4vw);
+  line-height: var(--line-height-small);
+}
+
+a {
+  color: black;
+}
+
+header {
+  padding: var(--s0);
+}
+
+.navigation li {
+  padding: 0 var(--s0);
+}
+.navigation a {
+  text-decoration: none;
+}
+.navigation .active {
+  text-decoration: underline;
+}
+
+.radio-track .track-info {
+  padding: var(--s0);
+}
+
+.radio-cover img {
+  width: 400px;
+  height: 400px;
+}
+
+.radio-track .artist {
+  font-size: var(--s1);
+  line-height: var(--line-height-small);
+}
+
+.global-player {
+  background: white;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--s1);
+  border-top: 4px solid #ddd;
+}
+
+.global-player .controls > * {
+  padding: 0 var(--s0);
+}
+.global-player .controls svg {
+  height: var(--s1);
+  width: var(--s1);
+}
+
+.body-radio .global-player img {
+  display: none;
+}
+.global-player img {
+  width: var(--s4);
+  height: var(--s4);
+}
+.body-radio .global-player .track-info {
+  display: none;
+}
+.global-player .artist {
+  font-size: var(--s-1);
+}
+
+.latest-tracks {
+  padding-top: var(--s2);
+}
+.latest-track {
+  width: 250px;
+}
+.latest-track .track-info {
+  padding: var(--s-3);
+}
+.latest-track .title,
+.latest-track .source {
+  font-size: var(--s-1);
+  line-height: var(--line-height-small);
+}
+.latest-tracks img {
+  filter: grayscale(0.5);
+  width: 250px;
+  height: 250px;
+}
+.latest-tracks img:hover {
+  filter: grayscale(0) brightness(1.2);
+  cursor: pointer;
+}

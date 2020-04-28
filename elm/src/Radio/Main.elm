@@ -86,5 +86,5 @@ subscriptions model =
 navigation : List (Model.NavigationItem Radio.Model.Page PlaylistId)
 navigation =
     [ Model.NavigationItem "Radio" "/" RadioPage (Just Radio)
-    , Model.NavigationItem "New" "/latest" LatestTracksPage (Just LatestTracks)
+    , Model.NavigationItem "All tracks" "/latest" LatestTracksPage (Just LatestTracks)
     ]
