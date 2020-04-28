@@ -25,19 +25,6 @@ view model =
             model.currentPage
             (Player.currentPlaylist model.player)
         , div
-            [ classList
-                [ ( "radio-playlist-overlay", True )
-                , ( "visible", model.showRadioPlaylist )
-                ]
-            , onClick ToggleRadioPlaylist
-            ]
-            [ text "" ]
-        , viewRadioPlaylist
-            model.showRadioPlaylist
-            (Player.currentTrack model.player)
-            model.tracks
-            (Player.playlistContent Radio model.player)
-        , div
             [ class "main" ]
             [ case model.currentPage of
                 RadioPage ->
@@ -271,18 +258,6 @@ viewUpcomingTrack playlistId ( position, track ) =
         , td [] [ div [ class "title" ] [ text track.title ] ]
         , td [] [ div [ class "artist" ] [ text track.artist ] ]
         ]
-
-
-viewRadioPlaylist : Bool -> Maybe TrackId -> Tracklist -> List TrackId -> Html Msg
-viewRadioPlaylist showRadioPlaylist currentTrackId tracks playlistContent =
-    Tracklist.getTracks playlistContent tracks
-        |> List.indexedMap (viewRadioPlaylistTrack currentTrackId)
-        |> div
-            [ classList
-                [ ( "radio-playlist", True )
-                , ( "visible", showRadioPlaylist )
-                ]
-            ]
 
 
 viewRadioPlaylistTrack : Maybe TrackId -> Int -> Track -> Html Msg
