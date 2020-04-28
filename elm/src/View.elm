@@ -57,7 +57,7 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing =
                         [ Icons.next ]
                     ]
                 , img
-                    [ src track.artwork_url ]
+                    [ src track.artwork_url, alt "" ]
                     []
                 , div
                     [ class "track-info" ]

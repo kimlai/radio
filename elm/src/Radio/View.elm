@@ -110,6 +110,7 @@ viewRadioTrack track currentPlaylist =
                     [ img
                         [ class "cover"
                         , src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t500x500") track.artwork_url)
+                        , alt ""
                         ]
                         []
                     ]
@@ -200,7 +201,9 @@ viewPlayedTrack track =
             [ div
                 [ class "cover" ]
                 [ img
-                    [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url) ]
+                    [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url)
+                    , alt ""
+                    ]
                     []
                 ]
             ]
@@ -259,7 +262,9 @@ viewUpcomingTrack playlistId ( position, track ) =
             [ div
                 [ class "cover" ]
                 [ img
-                    [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url) ]
+                    [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url)
+                    , alt ""
+                    ]
                     []
                 ]
             ]
@@ -293,7 +298,9 @@ viewRadioPlaylistTrack currentTrackId position track =
         [ div
             [ class "cover" ]
             [ img
-                [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url) ]
+                [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url)
+                , alt ""
+                ]
                 []
             ]
         , div
@@ -365,7 +372,9 @@ viewTrack currentTrackId currentTime playlistId position track =
                 , onClick (PlayFromPlaylist playlistId position)
                 ]
                 [ img
-                    [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url) ]
+                    [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url)
+                    , alt ""
+                    ]
                     []
                 ]
             , View.viewProgressBar SeekTo track
@@ -395,7 +404,7 @@ viewTrackPlaceHolder =
             [ class "track-info-container" ]
             [ div
                 [ class "cover" ]
-                [ img [ src "/images/placeholder.jpg" ] [] ]
+                [ img [ src "/images/placeholder.jpg", alt "" ] [] ]
             , div
                 [ class "progress-bar" ]
                 [ div [ class "outer" ] [] ]

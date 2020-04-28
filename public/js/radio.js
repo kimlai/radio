@@ -12975,7 +12975,11 @@ var _user$project$View$viewGlobalPlayer = F6(
 							{
 								ctor: '::',
 								_0: _elm_lang$html$Html_Attributes$src(_p6.artwork_url),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$alt(''),
+									_1: {ctor: '[]'}
+								}
 							},
 							{ctor: '[]'}),
 						_1: {
@@ -13081,7 +13085,11 @@ var _user$project$Radio_View$viewTrackPlaceHolder = A2(
 							{
 								ctor: '::',
 								_0: _elm_lang$html$Html_Attributes$src('/images/placeholder.jpg'),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$alt(''),
+									_1: {ctor: '[]'}
+								}
 							},
 							{ctor: '[]'}),
 						_1: {ctor: '[]'}
@@ -13186,7 +13194,11 @@ var _user$project$Radio_View$viewTrack = F5(
 													return 't200x200';
 												},
 												track.artwork_url)),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$alt(''),
+											_1: {ctor: '[]'}
+										}
 									},
 									{ctor: '[]'}),
 								_1: {ctor: '[]'}
@@ -13368,7 +13380,11 @@ var _user$project$Radio_View$viewRadioPlaylistTrack = F3(
 											return 't200x200';
 										},
 										track.artwork_url)),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$alt(''),
+									_1: {ctor: '[]'}
+								}
 							},
 							{ctor: '[]'}),
 						_1: {ctor: '[]'}
@@ -13516,7 +13532,11 @@ var _user$project$Radio_View$viewUpcomingTrack = F2(
 															return 't200x200';
 														},
 														_p7.artwork_url)),
-												_1: {ctor: '[]'}
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$alt(''),
+													_1: {ctor: '[]'}
+												}
 											},
 											{ctor: '[]'}),
 										_1: {ctor: '[]'}
@@ -13796,7 +13816,11 @@ var _user$project$Radio_View$viewPlayedTrack = function (track) {
 														return 't200x200';
 													},
 													track.artwork_url)),
-											_1: {ctor: '[]'}
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$alt(''),
+												_1: {ctor: '[]'}
+											}
 										},
 										{ctor: '[]'}),
 									_1: {ctor: '[]'}
@@ -14096,7 +14120,11 @@ var _user$project$Radio_View$viewRadioTrack = F2(
 													return 't500x500';
 												},
 												_p12.artwork_url)),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$alt(''),
+											_1: {ctor: '[]'}
+										}
 									}
 								},
 								{ctor: '[]'}),

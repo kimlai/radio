@@ -378,7 +378,11 @@ var _user$project$View$viewGlobalPlayer = F6(
 							{
 								ctor: '::',
 								_0: _elm_lang$html$Html_Attributes$src(_p6.artwork_url),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$alt(''),
+									_1: {ctor: '[]'}
+								}
 							},
 							{ctor: '[]'}),
 						_1: {
