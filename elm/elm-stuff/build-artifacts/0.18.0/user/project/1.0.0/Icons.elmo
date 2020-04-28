@@ -1,0 +1,549 @@
+var _user$project$Icons$heart = A2(
+	_elm_lang$svg$Svg$svg,
+	{
+		ctor: '::',
+		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-id', 'geomicon-heart'),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$fill('currentColor'),
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'height', '16'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 32 32'),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'width', '16'),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'xmlns', 'http://www.w3.org/2000/svg'),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$svg$Svg$path,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$d('M0 10 C0 6, 3 2, 8 2 C12 2, 15 5, 16 6 C17 5, 20 2, 24 2 C30 2, 32 6, 32 10 C32 18, 18 29, 16 30 C14 29, 0 18, 0 10'),
+				_1: {ctor: '[]'}
+			},
+			{ctor: '[]'}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Icons$next = A2(
+	_elm_lang$svg$Svg$svg,
+	{
+		ctor: '::',
+		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'height', '14px'),
+		_1: {
+			ctor: '::',
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'version', '1.1'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 12 14'),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'width', '12px'),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'xmlns', 'http://www.w3.org/2000/svg'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	},
+	{
+		ctor: '::',
+		_0: A3(
+			_elm_lang$svg$Svg$node,
+			'title',
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg$text('Skip'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$svg$Svg$g,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$fill('none'),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'fill-rule', 'evenodd'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$id('Page-1'),
+							_1: {
+								ctor: '::',
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'stroke', 'none'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'stroke-width', '1'),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$g,
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$fill('#333333'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$id('Player'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'transform', 'translate(-2620.000000, -397.000000)'),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$svg$Svg$path,
+								{
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$d('M2630,403 L2620,397 L2620,411 L2630,405 L2630,411 L2632,411 L2632,397 L2630,397 L2630,403 Z'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$id('Skip'),
+										_1: {ctor: '[]'}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Icons$error = A2(
+	_elm_lang$svg$Svg$svg,
+	{
+		ctor: '::',
+		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'height', '20px'),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$id('svg3017'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 17 20'),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'width', '17px'),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'xmlns', 'http://www.w3.org/2000/svg'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	},
+	{
+		ctor: '::',
+		_0: A3(
+			_elm_lang$svg$Svg$node,
+			'sodipodi:namedview',
+			{
+				ctor: '::',
+				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'bordercolor', '#666666'),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'borderopacity', '1'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{ctor: '[]'}),
+		_1: {
+			ctor: '::',
+			_0: A3(
+				_elm_lang$svg$Svg$node,
+				'title',
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$id('title3019'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg$text('Play'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$path,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$d('M 1.5198618,2.970639 15.440414,16.580311'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$id('path3032'),
+							_1: {
+								ctor: '::',
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'inkscape:connector-curvature', '0'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'sodipodi:nodetypes', 'cc'),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'style', 'fill:none;stroke:#000000;stroke-width:3.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg$text(''),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$svg$Svg$path,
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$d('M 15.405872,3.0051813 1.4853195,16.580311'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$id('path3034'),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'inkscape:connector-curvature', '0'),
+										_1: {
+											ctor: '::',
+											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'sodipodi:nodetypes', 'cc'),
+											_1: {
+												ctor: '::',
+												_0: A2(_elm_lang$html$Html_Attributes$attribute, 'style', 'fill:none;stroke:#000000;stroke-width:3.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg$text(''),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		}
+	});
+var _user$project$Icons$playlist = A2(
+	_elm_lang$svg$Svg$svg,
+	{
+		ctor: '::',
+		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'height', '18'),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 12 12'),
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'width', '18'),
+				_1: {ctor: '[]'}
+			}
+		}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$svg$Svg$g,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$path,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$d('M7.5,4.5 L0,8.5 L0,0.5 L7.5,4.5 L7.5,4.5 Z M3,11 L3,10 L12,10 L12,11 L3,11 L3,11 Z M12,7 L12,8 L5,8 L5,7 L12,7 L12,7 Z M8.00000487,3.99835018 L12,3.99835018 L12,4.99835018 L8,4.99835018 L8,3.99835018 L8.00000487,3.99835018 L8.00000487,3.99835018 Z'),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Icons$pause = A2(
+	_elm_lang$svg$Svg$svg,
+	{
+		ctor: '::',
+		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'height', '20px'),
+		_1: {
+			ctor: '::',
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'version', '1.1'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 14 20'),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'width', '14px'),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'xmlns', 'http://www.w3.org/2000/svg'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	},
+	{
+		ctor: '::',
+		_0: A3(
+			_elm_lang$svg$Svg$node,
+			'title',
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg$text('Pause'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$svg$Svg$g,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$fill('none'),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'fill-rule', 'evenodd'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$id('Page-1'),
+							_1: {
+								ctor: '::',
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'stroke', 'none'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'stroke-width', '1'),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$g,
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$fill('#333333'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$id('Player'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'transform', 'translate(-2710.000000, -394.000000)'),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$svg$Svg$g,
+								{
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$id('Pause'),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'transform', 'translate(2710.000000, 394.000000)'),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$svg$Svg$g,
+										{
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$id('Rectangle-131-+-Rectangle-131'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A3(
+												_elm_lang$svg$Svg$node,
+												'rect',
+												{
+													ctor: '::',
+													_0: A2(_elm_lang$html$Html_Attributes$attribute, 'height', '20'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$svg$Svg_Attributes$id('Rectangle-131'),
+														_1: {
+															ctor: '::',
+															_0: A2(_elm_lang$html$Html_Attributes$attribute, 'width', '5'),
+															_1: {
+																ctor: '::',
+																_0: A2(_elm_lang$html$Html_Attributes$attribute, 'x', '0'),
+																_1: {
+																	ctor: '::',
+																	_0: A2(_elm_lang$html$Html_Attributes$attribute, 'y', '0'),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}
+												},
+												{ctor: '[]'}),
+											_1: {
+												ctor: '::',
+												_0: A3(
+													_elm_lang$svg$Svg$node,
+													'rect',
+													{
+														ctor: '::',
+														_0: A2(_elm_lang$html$Html_Attributes$attribute, 'height', '20'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$svg$Svg_Attributes$id('Rectangle-131'),
+															_1: {
+																ctor: '::',
+																_0: A2(_elm_lang$html$Html_Attributes$attribute, 'width', '5'),
+																_1: {
+																	ctor: '::',
+																	_0: A2(_elm_lang$html$Html_Attributes$attribute, 'x', '9'),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'y', '0'),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													},
+													{ctor: '[]'}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Icons$play = A2(
+	_elm_lang$svg$Svg$svg,
+	{
+		ctor: '::',
+		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'height', '20px'),
+		_1: {
+			ctor: '::',
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'version', '1.1'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 17 20'),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'width', '17px'),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'xmlns', 'http://www.w3.org/2000/svg'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	},
+	{
+		ctor: '::',
+		_0: A3(
+			_elm_lang$svg$Svg$node,
+			'title',
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg$text('Play'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$svg$Svg$g,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$fill('none'),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'fill-rule', 'evenodd'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$id('Page-1'),
+							_1: {
+								ctor: '::',
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'stroke', 'none'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'stroke-width', '1'),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$g,
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$fill('#333333'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$id('Player'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'transform', 'translate(-2758.000000, -394.000000)'),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$svg$Svg$path,
+								{
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$d('M2758,394 L2758,414 L2775,404 L2758,394 Z'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$id('Play'),
+										_1: {ctor: '[]'}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		}
+	});

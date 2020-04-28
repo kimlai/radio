@@ -1,0 +1,181 @@
+var _user$project$Radio_LoginForm$shouldBeValid = F2(
+	function (field, _p0) {
+		var _p1 = _p0;
+		return !_elm_lang$core$List$isEmpty(
+			A2(
+				_elm_lang$core$List$filter,
+				F2(
+					function (x, y) {
+						return _elm_lang$core$Native_Utils.eq(x, y);
+					})(field),
+				_p1.fieldsWhichShouldBeValid));
+	});
+var _user$project$Radio_LoginForm$ifEmpty = F2(
+	function (errorMessage, value) {
+		return _elm_lang$core$String$isEmpty(value) ? _elm_lang$core$Maybe$Just(errorMessage) : _elm_lang$core$Maybe$Nothing;
+	});
+var _user$project$Radio_LoginForm$validate = F2(
+	function (validators, form) {
+		validate:
+		while (true) {
+			var _p2 = validators;
+			if (_p2.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p3 = _p2._0(form);
+				if (_p3.ctor === 'Just') {
+					return _elm_lang$core$Maybe$Just(_p3._0);
+				} else {
+					var _v3 = _p2._1,
+						_v4 = form;
+					validators = _v3;
+					form = _v4;
+					continue validate;
+				}
+			}
+		}
+	});
+var _user$project$Radio_LoginForm$serverError = F2(
+	function (field, _p4) {
+		var _p5 = _p4;
+		return A2(
+			_elm_lang$core$Maybe$map,
+			_elm_lang$core$Tuple$second,
+			_elm_lang$core$List$head(
+				A2(
+					_elm_lang$core$List$filter,
+					function (_p6) {
+						var _p7 = _p6;
+						return _elm_lang$core$Native_Utils.eq(_p7._0, field);
+					},
+					_p5.serverErrors)));
+	});
+var _user$project$Radio_LoginForm$setServerErrors = F2(
+	function (errors, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{serverErrors: errors});
+	});
+var _user$project$Radio_LoginForm$startValidating = F2(
+	function (field, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{
+				fieldsWhichShouldBeValid: A2(
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						}),
+					field,
+					form.fieldsWhichShouldBeValid)
+			});
+	});
+var _user$project$Radio_LoginForm$empty = {
+	emailOrUsername: '',
+	password: '',
+	fieldsWhichShouldBeValid: {ctor: '[]'},
+	serverErrors: {ctor: '[]'}
+};
+var _user$project$Radio_LoginForm$LoginForm = F4(
+	function (a, b, c, d) {
+		return {emailOrUsername: a, password: b, fieldsWhichShouldBeValid: c, serverErrors: d};
+	});
+var _user$project$Radio_LoginForm$Password = {ctor: 'Password'};
+var _user$project$Radio_LoginForm$updatePassword = F2(
+	function (newPassword, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{
+				password: newPassword,
+				serverErrors: A2(
+					_elm_lang$core$List$filter,
+					function (_p8) {
+						var _p9 = _p8;
+						return !_elm_lang$core$Native_Utils.eq(_p9._0, _user$project$Radio_LoginForm$Password);
+					},
+					form.serverErrors)
+			});
+	});
+var _user$project$Radio_LoginForm$validatePassword = _user$project$Radio_LoginForm$validate(
+	{
+		ctor: '::',
+		_0: _user$project$Radio_LoginForm$serverError(_user$project$Radio_LoginForm$Password),
+		_1: {
+			ctor: '::',
+			_0: function (_p10) {
+				return A2(
+					_user$project$Radio_LoginForm$ifEmpty,
+					'Please enter a password',
+					function (_) {
+						return _.password;
+					}(_p10));
+			},
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Radio_LoginForm$EmailorUsername = {ctor: 'EmailorUsername'};
+var _user$project$Radio_LoginForm$updateEmailOrUsername = F2(
+	function (newEmailOrUsername, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{
+				emailOrUsername: newEmailOrUsername,
+				serverErrors: A2(
+					_elm_lang$core$List$filter,
+					function (_p11) {
+						var _p12 = _p11;
+						return !_elm_lang$core$Native_Utils.eq(_p12._0, _user$project$Radio_LoginForm$EmailorUsername);
+					},
+					form.serverErrors)
+			});
+	});
+var _user$project$Radio_LoginForm$validateEmailOrUsername = _user$project$Radio_LoginForm$validate(
+	{
+		ctor: '::',
+		_0: _user$project$Radio_LoginForm$serverError(_user$project$Radio_LoginForm$EmailorUsername),
+		_1: {
+			ctor: '::',
+			_0: function (_p13) {
+				return A2(
+					_user$project$Radio_LoginForm$ifEmpty,
+					'Please enter your username or E-mail',
+					function (_) {
+						return _.emailOrUsername;
+					}(_p13));
+			},
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Radio_LoginForm$error = F2(
+	function (field, form) {
+		if (!A2(_user$project$Radio_LoginForm$shouldBeValid, field, form)) {
+			return _elm_lang$core$Maybe$Nothing;
+		} else {
+			var _p14 = field;
+			if (_p14.ctor === 'EmailorUsername') {
+				return _user$project$Radio_LoginForm$validateEmailOrUsername(form);
+			} else {
+				return _user$project$Radio_LoginForm$validatePassword(form);
+			}
+		}
+	});
+var _user$project$Radio_LoginForm$isValid = function (form) {
+	return A2(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			}),
+		_elm_lang$core$Maybe$Nothing,
+		A2(
+			_user$project$Radio_LoginForm$validate,
+			{
+				ctor: '::',
+				_0: _user$project$Radio_LoginForm$validateEmailOrUsername,
+				_1: {
+					ctor: '::',
+					_0: _user$project$Radio_LoginForm$validatePassword,
+					_1: {ctor: '[]'}
+				}
+			},
+			form));
+};

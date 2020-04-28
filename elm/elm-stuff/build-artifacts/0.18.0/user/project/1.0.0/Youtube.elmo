@@ -1,0 +1,17 @@
+var _user$project$Youtube$extractYoutubeIdFromUrl = function (url) {
+	return _elm_lang$core$List$head(
+		A2(
+			_elm_lang$core$List$filterMap,
+			_elm_lang$core$Basics$identity,
+			_elm_lang$core$List$concat(
+				A2(
+					_elm_lang$core$List$map,
+					function (_) {
+						return _.submatches;
+					},
+					A3(
+						_elm_lang$core$Regex$find,
+						_elm_lang$core$Regex$AtMost(1),
+						_elm_lang$core$Regex$regex('https:\\/\\/www\\.youtube\\.com\\/watch\\?v=(.+)'),
+						url)))));
+};

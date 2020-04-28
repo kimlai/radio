@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Radio | Kim Laï</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/modern-css-reset/dist/reset.min.css"
+    />
+    <link rel="stylesheet" href="/public/css/app.css" />
+    <script src="/public/js/soundcloud.js"></script>
+    <script src="/public/js/youtube.js"></script>
+    <script src="/public/js/initializePlayer.js"></script>
+    <script src="/public/js/radio.js"></script>
+  </head>
+  <body>
+    <div hidden id="youtube-player">
+      <div id="player"></div>
+    </div>
+    <script>
+      var tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName("script")[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      function onYouTubeIframeAPIReady() {
+        var soundcloudClientId = "SOUNDCLOUD_CLIENT_ID";
+        var app = Elm.Radio.Main.fullscreen();
+
+        app = initializePlayer(soundcloudClientId, app);
+
+        app.ports.scroll.subscribe(function(offset) {
+          window.scrollBy(0, offset);
+        });
+
+        app.ports.storeAuthToken.subscribe(function(token) {
+          window.localStorage.setItem("authToken", token);
+        });
+      }
+    </script>
+  </body>
+</html>

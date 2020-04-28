@@ -1,0 +1,246 @@
+var _user$project$Radio_SignupView$view = function (form) {
+	return A2(
+		_elm_lang$html$Html$form,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('signup-form'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onSubmit(_user$project$Radio_Update$SignupSubmit),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h1,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Create an account to save tracks'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$input,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$type_('text'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$placeholder('Username'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$name('name'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$value(form.username),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onInput(_user$project$Radio_Update$SignupUpdateUsername),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onBlur(
+														_user$project$Radio_Update$SignupBlurredField(_user$project$Radio_SignupForm$Username)),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('error'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$Maybe$withDefault,
+											'',
+											A2(_user$project$Radio_SignupForm$error, _user$project$Radio_SignupForm$Username, form))),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$input,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$type_('text'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$name('email'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$placeholder('E-mail'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$value(form.email),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onInput(_user$project$Radio_Update$SignupUpdateEmail),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onBlur(
+															_user$project$Radio_Update$SignupBlurredField(_user$project$Radio_SignupForm$Email)),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('error'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(
+											A2(
+												_elm_lang$core$Maybe$withDefault,
+												'',
+												A2(_user$project$Radio_SignupForm$error, _user$project$Radio_SignupForm$Email, form))),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$input,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$type_('password'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$placeholder('Password'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$value(form.password),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onInput(_user$project$Radio_Update$SignupUpdatePassword),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onBlur(
+															_user$project$Radio_Update$SignupBlurredField(_user$project$Radio_SignupForm$Password)),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('error'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(
+												A2(
+													_elm_lang$core$Maybe$withDefault,
+													'',
+													A2(_user$project$Radio_SignupForm$error, _user$project$Radio_SignupForm$Password, form))),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$type_('submit'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$disabled(
+											!_user$project$Radio_SignupForm$isValid(form)),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Go!'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$span,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('or '),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A4(
+												_user$project$Html_Extra$link,
+												_user$project$Radio_Update$FollowLink,
+												'/login',
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('log in'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};

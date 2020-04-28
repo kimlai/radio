@@ -1,0 +1,434 @@
+var _user$project$View$viewNavigationItem = F4(
+	function (followLink, currentPage, currentPlaylist, navigationItem) {
+		return A2(
+			_elm_lang$html$Html$li,
+			{
+				ctor: '::',
+				_0: A3(
+					_elm_lang$html$Html_Events$onWithOptions,
+					'click',
+					{stopPropagation: false, preventDefault: true},
+					_elm_lang$core$Json_Decode$succeed(
+						followLink(navigationItem.href))),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$a,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$classList(
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'active',
+									_1: _elm_lang$core$Native_Utils.eq(navigationItem.page, currentPage)
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'playing',
+										_1: (!_elm_lang$core$Native_Utils.eq(navigationItem.playlist, _elm_lang$core$Maybe$Nothing)) && _elm_lang$core$Native_Utils.eq(navigationItem.playlist, currentPlaylist)
+									},
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$href(navigationItem.href),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(navigationItem.displayName),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$View$viewNavigation = F4(
+	function (followLink, navigationItems, currentPage, currentPlaylist) {
+		return A2(
+			_elm_lang$html$Html$nav,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('navigation'),
+				_1: {ctor: '[]'}
+			},
+			A2(
+				_elm_lang$core$List$repeat,
+				1,
+				A2(
+					_elm_lang$html$Html$ul,
+					{ctor: '[]'},
+					A2(
+						_elm_lang$core$List$map,
+						A3(_user$project$View$viewNavigationItem, followLink, currentPage, currentPlaylist),
+						navigationItems))));
+	});
+var _user$project$View$viewLikeButton = F3(
+	function (addLike, removeLike, track) {
+		return track.liked ? A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('unlike'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$alt('Unlike'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							removeLike(track.id)),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Icons$heart,
+				_1: {ctor: '[]'}
+			}) : A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('like'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$alt('Like'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							addLike(track.id)),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Icons$heart,
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$View$viewShowRadioPlaylistToggle = function (followLink) {
+	return A4(
+		_user$project$Html_Extra$link,
+		followLink,
+		'/queue/next',
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('show-radio-playlist'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$Icons$playlist,
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$View$Element = function (a) {
+	return {ctor: 'Element', _0: a};
+};
+var _user$project$View$instanciateElement = F2(
+	function (offsetLeft, offsetParent) {
+		return _user$project$View$Element(
+			{offsetLeft: offsetLeft, offsetParent: offsetParent});
+	});
+var _user$project$View$decodeElement = A2(
+	_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+	A2(
+		_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+		_elm_lang$core$Json_Decode$succeed(_user$project$View$instanciateElement),
+		A2(_elm_lang$core$Json_Decode$field, 'offsetLeft', _elm_lang$core$Json_Decode$float)),
+	A2(
+		_elm_lang$core$Json_Decode$field,
+		'offsetParent',
+		_elm_lang$core$Json_Decode$nullable(
+			_elm_lang$core$Json_Decode$lazy(
+				function (_p0) {
+					return _user$project$View$decodeElement;
+				}))));
+var _user$project$View$decodeClickXPosition = function () {
+	var totalOffset = function (_p1) {
+		var _p2 = _p1;
+		var _p4 = _p2._0.offsetLeft;
+		var _p3 = _p2._0.offsetParent;
+		if (_p3.ctor === 'Nothing') {
+			return _p4;
+		} else {
+			return _p4 + totalOffset(_p3._0);
+		}
+	};
+	return A2(
+		_elm_lang$core$Json_Decode$map,
+		F2(
+			function (x, y) {
+				return x * y;
+			})(100),
+		A3(
+			_elm_lang$core$Json_Decode$map2,
+			F2(
+				function (x, y) {
+					return x / y;
+				}),
+			A3(
+				_elm_lang$core$Json_Decode$map2,
+				F2(
+					function (x, y) {
+						return x - y;
+					}),
+				A2(
+					_elm_lang$core$Json_Decode$at,
+					{
+						ctor: '::',
+						_0: 'pageX',
+						_1: {ctor: '[]'}
+					},
+					_elm_lang$core$Json_Decode$float),
+				A2(
+					_elm_lang$core$Json_Decode$map,
+					totalOffset,
+					A2(
+						_elm_lang$core$Json_Decode$at,
+						{
+							ctor: '::',
+							_0: 'target',
+							_1: {ctor: '[]'}
+						},
+						_user$project$View$decodeElement))),
+			A2(
+				_elm_lang$core$Json_Decode$at,
+				{
+					ctor: '::',
+					_0: 'target',
+					_1: {
+						ctor: '::',
+						_0: 'offsetWidth',
+						_1: {ctor: '[]'}
+					}
+				},
+				_elm_lang$core$Json_Decode$float)));
+}();
+var _user$project$View$viewProgressBar = F2(
+	function (seekTo, track) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('progress-bar'),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html_Events$on,
+						'click',
+						A2(_elm_lang$core$Json_Decode$map, seekTo, _user$project$View$decodeClickXPosition)),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('outer'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('inner'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										{
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: 'width',
+												_1: A2(
+													_elm_lang$core$Basics_ops['++'],
+													_elm_lang$core$Basics$toString(track.progress),
+													'%')
+											},
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('drag'),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html_Events$on,
+									'click',
+									A2(_elm_lang$core$Json_Decode$map, seekTo, _user$project$View$decodeClickXPosition)),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(''),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$View$viewGlobalPlayer = F6(
+	function (followLink, tooglePlayback, next, seekTo, track, playing) {
+		var _p5 = track;
+		if (_p5.ctor === 'Nothing') {
+			return _elm_lang$html$Html$text('');
+		} else {
+			var _p6 = _p5._0;
+			var icon = _p6.error ? _user$project$Icons$error : (playing ? _user$project$Icons$pause : _user$project$Icons$play);
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('global-player'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('controls'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$View$viewShowRadioPlaylistToggle(followLink),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$classList(
+											{
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'playback-button', _1: true},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'playing', _1: playing && (!_p6.error)},
+													_1: {
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'error', _1: _p6.error},
+														_1: {ctor: '[]'}
+													}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(tooglePlayback),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: icon,
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('next-button'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(next),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _user$project$Icons$next,
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$img,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$src(_p6.artwork_url),
+								_1: {ctor: '[]'}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('track-info'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('title'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(_p6.title),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('artist'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													A2(_elm_lang$core$Basics_ops['++'], 'by ', _p6.artist)),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(_user$project$View$viewProgressBar, seekTo, _p6),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				});
+		}
+	});

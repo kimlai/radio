@@ -1,0 +1,51 @@
+var _user$project$Radio_Model$currentTrack = function (model) {
+	return A2(
+		_elm_lang$core$Maybe$andThen,
+		A2(_elm_lang$core$Basics$flip, _user$project$Tracklist$get, model.tracks),
+		_user$project$Player$currentTrack(model.player));
+};
+var _user$project$Radio_Model$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return {tracks: a, radio: b, showRadioPlaylist: c, latestTracks: d, played: e, playing: f, currentPage: g, lastKeyPressed: h, currentTime: i, player: j, navigation: k};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Radio_Model$Playlist = F3(
+	function (a, b, c) {
+		return {id: a, status: b, nextLink: c};
+	});
+var _user$project$Radio_Model$Fetched = {ctor: 'Fetched'};
+var _user$project$Radio_Model$Fetching = {ctor: 'Fetching'};
+var _user$project$Radio_Model$NotRequested = {ctor: 'NotRequested'};
+var _user$project$Radio_Model$emptyPlaylist = F2(
+	function (id, fetchUrl) {
+		return {
+			id: id,
+			status: _user$project$Radio_Model$NotRequested,
+			nextLink: _elm_lang$core$Maybe$Just(fetchUrl)
+		};
+	});
+var _user$project$Radio_Model$PageNotFound = {ctor: 'PageNotFound'};
+var _user$project$Radio_Model$LatestTracksPage = {ctor: 'LatestTracksPage'};
+var _user$project$Radio_Model$PlayedPage = {ctor: 'PlayedPage'};
+var _user$project$Radio_Model$UpNextPage = {ctor: 'UpNextPage'};
+var _user$project$Radio_Model$RadioPage = {ctor: 'RadioPage'};
+var _user$project$Radio_Model$LatestTracks = {ctor: 'LatestTracks'};
+var _user$project$Radio_Model$Radio = {ctor: 'Radio'};

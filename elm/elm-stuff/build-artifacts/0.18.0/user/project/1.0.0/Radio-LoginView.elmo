@@ -1,0 +1,192 @@
+var _user$project$Radio_LoginView$view = function (form) {
+	return A2(
+		_elm_lang$html$Html$form,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('login-form'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onSubmit(_user$project$Radio_Update$LoginSubmit),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$action('login'),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h1,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Sign in to Me Likey Radio'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$input,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$type_('text'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$placeholder('Username or E-mail'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$name('name'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$id('usernameOrEmail'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onInput(_user$project$Radio_Update$LoginUpdateEmailOrUsername),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onBlur(
+														_user$project$Radio_Update$LoginBlurredField(_user$project$Radio_LoginForm$EmailorUsername)),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('error'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$Maybe$withDefault,
+											'',
+											A2(_user$project$Radio_LoginForm$error, _user$project$Radio_LoginForm$EmailorUsername, form))),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$input,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$type_('password'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$placeholder('Password'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onInput(_user$project$Radio_Update$LoginUpdatePassword),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onBlur(
+													_user$project$Radio_Update$LoginBlurredField(_user$project$Radio_LoginForm$Password)),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$id('password'),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('error'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(
+											A2(
+												_elm_lang$core$Maybe$withDefault,
+												'',
+												A2(_user$project$Radio_LoginForm$error, _user$project$Radio_LoginForm$Password, form))),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$button,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$type_('submit'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$disabled(
+										!_user$project$Radio_LoginForm$isValid(form)),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Go!'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$span,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('or '),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A4(
+											_user$project$Html_Extra$link,
+											_user$project$Radio_Update$FollowLink,
+											'/sign-up',
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('sign up'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+};

@@ -1,0 +1,101 @@
+var _user$project$Radio_Main$navigation = {
+	ctor: '::',
+	_0: A4(
+		_user$project$Model$NavigationItem,
+		'Radio',
+		'/',
+		_user$project$Radio_Model$RadioPage,
+		_elm_lang$core$Maybe$Just(_user$project$Radio_Model$Radio)),
+	_1: {
+		ctor: '::',
+		_0: A4(
+			_user$project$Model$NavigationItem,
+			'New',
+			'/latest',
+			_user$project$Radio_Model$LatestTracksPage,
+			_elm_lang$core$Maybe$Just(_user$project$Radio_Model$LatestTracks)),
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$Radio_Main$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: _user$project$PlayerEngine$trackProgress(_user$project$Radio_Update$TrackProgress),
+			_1: {
+				ctor: '::',
+				_0: _user$project$PlayerEngine$trackEnd(
+					function (_p0) {
+						return _user$project$Radio_Update$Next;
+					}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$PlayerEngine$trackError(_user$project$Radio_Update$TrackError),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$keyboard$Keyboard$presses(_user$project$Radio_Update$KeyPressed),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Radio_Main$route = function (location) {
+	return _user$project$Radio_Router$urlToPage(location.pathname);
+};
+var _user$project$Radio_Main$init = function (location) {
+	var setCurrentTime = A2(_elm_lang$core$Task$perform, _user$project$Radio_Update$UpdateCurrentTime, _elm_lang$core$Time$now);
+	var fetchLatestTracks = _user$project$Radio_Update$update(
+		A2(_user$project$Radio_Update$FetchMore, _user$project$Radio_Model$LatestTracks, false));
+	var initializeRadio = A2(
+		_elm_lang$http$Http$send,
+		A2(
+			_user$project$Radio_Update$FetchedMore,
+			_user$project$Radio_Model$Radio,
+			_elm_lang$core$Native_Utils.eq(
+				_user$project$Radio_Model$RadioPage,
+				_user$project$Radio_Main$route(location))),
+		A2(_user$project$Api$fetchPlaylist, '/public/json/playlist.json', _user$project$Api$decodeTrack));
+	var navigateToLocation = _user$project$Radio_Update$update(
+		_user$project$Radio_Update$NavigateTo(
+			_user$project$Radio_Main$route(location)));
+	var model = {
+		tracks: _user$project$Tracklist$empty,
+		radio: A2(_user$project$Radio_Model$emptyPlaylist, _user$project$Radio_Model$Radio, '/api/playlist'),
+		showRadioPlaylist: false,
+		latestTracks: A2(_user$project$Radio_Model$emptyPlaylist, _user$project$Radio_Model$LatestTracks, '/api/latest-tracks'),
+		played: {ctor: '[]'},
+		playing: false,
+		currentPage: _user$project$Radio_Main$route(location),
+		lastKeyPressed: _elm_lang$core$Maybe$Nothing,
+		currentTime: _elm_lang$core$Maybe$Nothing,
+		player: _user$project$Player$initialize(
+			{
+				ctor: '::',
+				_0: _user$project$Radio_Model$Radio,
+				_1: {
+					ctor: '::',
+					_0: _user$project$Radio_Model$LatestTracks,
+					_1: {ctor: '[]'}
+				}
+			}),
+		navigation: _user$project$Radio_Main$navigation
+	};
+	return A2(
+		_user$project$Update$addCmd,
+		setCurrentTime,
+		A2(
+			_user$project$Update$addCmd,
+			initializeRadio,
+			A2(
+				_user$project$Update$andThen,
+				fetchLatestTracks,
+				navigateToLocation(model))));
+};
+var _user$project$Radio_Main$main = A2(
+	_elm_lang$navigation$Navigation$program,
+	function (location) {
+		return _user$project$Radio_Update$NavigateTo(
+			_user$project$Radio_Main$route(location));
+	},
+	{init: _user$project$Radio_Main$init, view: _user$project$Radio_View$view, update: _user$project$Radio_Update$update, subscriptions: _user$project$Radio_Main$subscriptions})();

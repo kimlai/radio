@@ -1,0 +1,289 @@
+var _user$project$Radio_SignupForm$shouldBeValid = F2(
+	function (field, _p0) {
+		var _p1 = _p0;
+		return !_elm_lang$core$List$isEmpty(
+			A2(
+				_elm_lang$core$List$filter,
+				F2(
+					function (x, y) {
+						return _elm_lang$core$Native_Utils.eq(x, y);
+					})(field),
+				_p1.fieldsWhichShouldBeValid));
+	});
+var _user$project$Radio_SignupForm$ifNotValidEmail = F2(
+	function (errorMessage, value) {
+		var isValidEmail = _elm_lang$core$Regex$contains(
+			_elm_lang$core$Regex$regex('^[^@]+@[^@]+\\.[^@]+$'));
+		return isValidEmail(value) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(errorMessage);
+	});
+var _user$project$Radio_SignupForm$ifNotAvailable = F3(
+	function (availablities, errorMessage, value) {
+		return _elm_lang$core$Native_Utils.eq(
+			A2(_elm_lang$core$Dict$get, value, availablities),
+			_elm_lang$core$Maybe$Just(false)) ? _elm_lang$core$Maybe$Just(errorMessage) : _elm_lang$core$Maybe$Nothing;
+	});
+var _user$project$Radio_SignupForm$ifEmpty = F2(
+	function (errorMessage, value) {
+		return _elm_lang$core$String$isEmpty(value) ? _elm_lang$core$Maybe$Just(errorMessage) : _elm_lang$core$Maybe$Nothing;
+	});
+var _user$project$Radio_SignupForm$validate = F2(
+	function (validators, form) {
+		validate:
+		while (true) {
+			var _p2 = validators;
+			if (_p2.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p3 = _p2._0(form);
+				if (_p3.ctor === 'Just') {
+					return _elm_lang$core$Maybe$Just(_p3._0);
+				} else {
+					var _v3 = _p2._1,
+						_v4 = form;
+					validators = _v3;
+					form = _v4;
+					continue validate;
+				}
+			}
+		}
+	});
+var _user$project$Radio_SignupForm$validatePassword = function (form) {
+	return A2(
+		_user$project$Radio_SignupForm$validate,
+		{
+			ctor: '::',
+			_0: function (_p4) {
+				return A2(
+					_user$project$Radio_SignupForm$ifEmpty,
+					'Please enter a password',
+					function (_) {
+						return _.password;
+					}(_p4));
+			},
+			_1: {ctor: '[]'}
+		},
+		form);
+};
+var _user$project$Radio_SignupForm$serverError = F2(
+	function (field, _p5) {
+		var _p6 = _p5;
+		return A2(
+			_elm_lang$core$Maybe$map,
+			_elm_lang$core$Tuple$second,
+			_elm_lang$core$List$head(
+				A2(
+					_elm_lang$core$List$filter,
+					function (_p7) {
+						var _p8 = _p7;
+						return _elm_lang$core$Native_Utils.eq(_p8._0, field);
+					},
+					_p6.serverErrors)));
+	});
+var _user$project$Radio_SignupForm$setServerErrors = F2(
+	function (errors, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{serverErrors: errors});
+	});
+var _user$project$Radio_SignupForm$startValidating = F2(
+	function (field, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{
+				fieldsWhichShouldBeValid: A2(
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						}),
+					field,
+					form.fieldsWhichShouldBeValid)
+			});
+	});
+var _user$project$Radio_SignupForm$updateAvailabilities = F2(
+	function (_p9, form) {
+		var _p10 = _p9;
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{
+				usernameAvailabilities: A3(_elm_lang$core$Dict$insert, _p10._1._0, _p10._1._1, form.usernameAvailabilities),
+				emailAvailabilities: A3(_elm_lang$core$Dict$insert, _p10._0._0, _p10._0._1, form.emailAvailabilities)
+			});
+	});
+var _user$project$Radio_SignupForm$empty = {
+	email: '',
+	username: '',
+	password: '',
+	fieldsWhichShouldBeValid: {ctor: '[]'},
+	serverErrors: {ctor: '[]'},
+	usernameAvailabilities: _elm_lang$core$Dict$empty,
+	emailAvailabilities: _elm_lang$core$Dict$empty
+};
+var _user$project$Radio_SignupForm$SignupForm = F7(
+	function (a, b, c, d, e, f, g) {
+		return {email: a, username: b, password: c, fieldsWhichShouldBeValid: d, serverErrors: e, usernameAvailabilities: f, emailAvailabilities: g};
+	});
+var _user$project$Radio_SignupForm$Password = {ctor: 'Password'};
+var _user$project$Radio_SignupForm$updatePassword = F2(
+	function (newPassword, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{
+				password: newPassword,
+				serverErrors: A2(
+					_elm_lang$core$List$filter,
+					function (_p11) {
+						var _p12 = _p11;
+						return !_elm_lang$core$Native_Utils.eq(_p12._0, _user$project$Radio_SignupForm$Password);
+					},
+					form.serverErrors)
+			});
+	});
+var _user$project$Radio_SignupForm$Username = {ctor: 'Username'};
+var _user$project$Radio_SignupForm$updateUsername = F2(
+	function (newUsername, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{
+				username: newUsername,
+				serverErrors: A2(
+					_elm_lang$core$List$filter,
+					function (_p13) {
+						var _p14 = _p13;
+						return !_elm_lang$core$Native_Utils.eq(_p14._0, _user$project$Radio_SignupForm$Username);
+					},
+					form.serverErrors)
+			});
+	});
+var _user$project$Radio_SignupForm$validateUsername = function (form) {
+	return A2(
+		_user$project$Radio_SignupForm$validate,
+		{
+			ctor: '::',
+			_0: _user$project$Radio_SignupForm$serverError(_user$project$Radio_SignupForm$Username),
+			_1: {
+				ctor: '::',
+				_0: function (_p15) {
+					return A2(
+						_user$project$Radio_SignupForm$ifEmpty,
+						'Please enter a username',
+						function (_) {
+							return _.username;
+						}(_p15));
+				},
+				_1: {
+					ctor: '::',
+					_0: function (_p16) {
+						return A3(
+							_user$project$Radio_SignupForm$ifNotAvailable,
+							form.usernameAvailabilities,
+							'Username is already taken',
+							function (_) {
+								return _.username;
+							}(_p16));
+					},
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		form);
+};
+var _user$project$Radio_SignupForm$Email = {ctor: 'Email'};
+var _user$project$Radio_SignupForm$updateEmail = F2(
+	function (newEmail, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{
+				email: newEmail,
+				serverErrors: A2(
+					_elm_lang$core$List$filter,
+					function (_p17) {
+						var _p18 = _p17;
+						return !_elm_lang$core$Native_Utils.eq(_p18._0, _user$project$Radio_SignupForm$Email);
+					},
+					form.serverErrors)
+			});
+	});
+var _user$project$Radio_SignupForm$validateEmail = function (form) {
+	return A2(
+		_user$project$Radio_SignupForm$validate,
+		{
+			ctor: '::',
+			_0: _user$project$Radio_SignupForm$serverError(_user$project$Radio_SignupForm$Email),
+			_1: {
+				ctor: '::',
+				_0: function (_p19) {
+					return A2(
+						_user$project$Radio_SignupForm$ifEmpty,
+						'Please enter an Email address',
+						function (_) {
+							return _.email;
+						}(_p19));
+				},
+				_1: {
+					ctor: '::',
+					_0: function (_p20) {
+						return A2(
+							_user$project$Radio_SignupForm$ifNotValidEmail,
+							'Please enter a valid Email',
+							function (_) {
+								return _.email;
+							}(_p20));
+					},
+					_1: {
+						ctor: '::',
+						_0: function (_p21) {
+							return A3(
+								_user$project$Radio_SignupForm$ifNotAvailable,
+								form.emailAvailabilities,
+								'Email is already taken',
+								function (_) {
+									return _.email;
+								}(_p21));
+						},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		form);
+};
+var _user$project$Radio_SignupForm$error = F2(
+	function (field, form) {
+		if (!A2(_user$project$Radio_SignupForm$shouldBeValid, field, form)) {
+			return _elm_lang$core$Maybe$Nothing;
+		} else {
+			var _p22 = field;
+			switch (_p22.ctor) {
+				case 'Username':
+					return _user$project$Radio_SignupForm$validateUsername(form);
+				case 'Email':
+					return _user$project$Radio_SignupForm$validateEmail(form);
+				default:
+					return _user$project$Radio_SignupForm$validatePassword(form);
+			}
+		}
+	});
+var _user$project$Radio_SignupForm$isValid = function (form) {
+	return A2(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			}),
+		_elm_lang$core$Maybe$Nothing,
+		A2(
+			_user$project$Radio_SignupForm$validate,
+			{
+				ctor: '::',
+				_0: _user$project$Radio_SignupForm$validateUsername,
+				_1: {
+					ctor: '::',
+					_0: _user$project$Radio_SignupForm$validateEmail,
+					_1: {
+						ctor: '::',
+						_0: _user$project$Radio_SignupForm$validatePassword,
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			form));
+};

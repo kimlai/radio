@@ -1,0 +1,4 @@
+var _user$project$Model$NavigationItem = F4(
+	function (a, b, c, d) {
+		return {displayName: a, href: b, page: c, playlist: d};
+	});

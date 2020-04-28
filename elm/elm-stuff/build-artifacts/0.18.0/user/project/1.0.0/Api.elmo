@@ -1,0 +1,123 @@
+var _user$project$Api$decodeYoutubeStreamingInfo = A2(
+	_elm_lang$core$Json_Decode$andThen,
+	function (id) {
+		return _elm_lang$core$Json_Decode$succeed(
+			_user$project$Track$Youtube(id));
+	},
+	A2(
+		_elm_lang$core$Json_Decode$at,
+		{
+			ctor: '::',
+			_0: 'youtube',
+			_1: {
+				ctor: '::',
+				_0: 'id',
+				_1: {ctor: '[]'}
+			}
+		},
+		_elm_lang$core$Json_Decode$string));
+var _user$project$Api$decodeSoundcloudStreamingInfo = A2(
+	_elm_lang$core$Json_Decode$andThen,
+	function (url) {
+		return _elm_lang$core$Json_Decode$succeed(
+			_user$project$Track$Soundcloud(url));
+	},
+	A2(
+		_elm_lang$core$Json_Decode$at,
+		{
+			ctor: '::',
+			_0: 'soundcloud',
+			_1: {
+				ctor: '::',
+				_0: 'stream_url',
+				_1: {ctor: '[]'}
+			}
+		},
+		_elm_lang$core$Json_Decode$string));
+var _user$project$Api$decodeStreamingInfo = _elm_lang$core$Json_Decode$oneOf(
+	{
+		ctor: '::',
+		_0: _user$project$Api$decodeSoundcloudStreamingInfo,
+		_1: {
+			ctor: '::',
+			_0: _user$project$Api$decodeYoutubeStreamingInfo,
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Api$decodeTrack = A2(
+	_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+	A2(
+		_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+		A2(
+			_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+			A2(
+				_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+				A2(
+					_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+					A2(
+						_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+						A2(
+							_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+							A2(
+								_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+								A2(
+									_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+									A2(
+										_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+										A2(
+											_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+											_elm_lang$core$Json_Decode$succeed(_user$project$Track$Track),
+											A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string)),
+										A2(_elm_lang$core$Json_Decode$field, 'artist', _elm_lang$core$Json_Decode$string)),
+									A2(
+										_elm_lang$core$Json_Decode$field,
+										'cover',
+										A2(_elm_community$json_extra$Json_Decode_Extra$withDefault, '/images/placeholder.jpg', _elm_lang$core$Json_Decode$string))),
+								A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string)),
+							_user$project$Api$decodeStreamingInfo),
+						A2(_elm_lang$core$Json_Decode$field, 'source', _elm_lang$core$Json_Decode$string)),
+					A2(_elm_lang$core$Json_Decode$field, 'created_at', _elm_community$json_extra$Json_Decode_Extra$date)),
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					'liked',
+					A2(_elm_community$json_extra$Json_Decode_Extra$withDefault, false, _elm_lang$core$Json_Decode$bool))),
+			_elm_lang$core$Json_Decode$succeed(0)),
+		_elm_lang$core$Json_Decode$succeed(0)),
+	_elm_lang$core$Json_Decode$succeed(false));
+var _user$project$Api$decodePlaylist = function (trackDecoder) {
+	return A3(
+		_elm_lang$core$Json_Decode$map2,
+		F2(
+			function (v0, v1) {
+				return {ctor: '_Tuple2', _0: v0, _1: v1};
+			}),
+		A2(
+			_elm_lang$core$Json_Decode$field,
+			'tracks',
+			_elm_lang$core$Json_Decode$list(trackDecoder)),
+		A2(
+			_elm_lang$core$Json_Decode$field,
+			'next_href',
+			_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string)));
+};
+var _user$project$Api$fetchFeedPlaylist = F2(
+	function (url, trackDecoder) {
+		return A2(
+			_elm_lang$http$Http$get,
+			url,
+			_user$project$Api$decodePlaylist(trackDecoder));
+	});
+var _user$project$Api$fetchPlaylist = F2(
+	function (url, trackDecoder) {
+		return _elm_lang$http$Http$request(
+			{
+				method: 'GET',
+				headers: {ctor: '[]'},
+				url: url,
+				body: _elm_lang$http$Http$emptyBody,
+				expect: _elm_lang$http$Http$expectJson(
+					_user$project$Api$decodePlaylist(trackDecoder)),
+				timeout: _elm_lang$core$Maybe$Nothing,
+				withCredentials: false
+			});
+	});
