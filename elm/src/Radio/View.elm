@@ -383,19 +383,20 @@ viewTrack currentTrackId currentTime playlistId position track =
                     ]
                     []
                 ]
-            , View.viewProgressBar SeekTo track
             , div
-                []
-                [ div
-                    [ class "track-info" ]
+                [ class "track-info" ]
+                [ node "stack-l"
+                    [ attribute "space" "var(--s-4)" ]
                     [ div [ class "artist" ] [ text track.artist ]
                     , div [ class "title" ] [ text track.title ]
-                    , a
-                        [ class "source"
-                        , target "_blank"
-                        , href track.sourceUrl
+                    , div
+                        [ class "source" ]
+                        [ a
+                            [ target "_blank"
+                            , href track.sourceUrl
+                            ]
+                            [ text source ]
                         ]
-                        [ text source ]
                     ]
                 ]
             ]

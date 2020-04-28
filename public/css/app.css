@@ -62,7 +62,7 @@ header {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: var(--s1);
+  padding: var(--s-1);
   border-top: 4px solid #ddd;
 }
 
@@ -74,6 +74,9 @@ header {
   width: var(--s1);
 }
 
+.body-radio .global-player {
+  padding: var(--s1);
+}
 .body-radio .global-player img {
   display: none;
 }
@@ -95,12 +98,17 @@ header {
   width: 250px;
 }
 .latest-track .track-info {
-  padding: var(--s-3);
+  padding: var(--s-2);
+}
+.latest-track .track-info > * {
+  line-height: var(--line-height-small);
 }
 .latest-track .title,
 .latest-track .source {
   font-size: var(--s-1);
-  line-height: var(--line-height-small);
+}
+.latest-track .source {
+  padding-top: var(--s-4);
 }
 .latest-tracks img {
   filter: grayscale(0.5);
@@ -110,4 +118,12 @@ header {
 .latest-tracks img:hover {
   filter: grayscale(0) brightness(1.2);
   cursor: pointer;
+}
+
+.latest-tracks .view-more {
+  margin-top: var(--s4);
+}
+
+.latest-tracks {
+  padding-bottom: var(--s4);
 }
