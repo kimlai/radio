@@ -67,7 +67,6 @@ header {
   left: 0;
   right: 0;
   padding: var(--s-1);
-  border-top: 4px solid #ddd;
 }
 
 .global-player .controls > * {
@@ -78,21 +77,27 @@ header {
   width: var(--s1);
 }
 
-.body-radio .global-player {
-  padding: var(--s1);
-}
-.body-radio .global-player img {
-  display: none;
-}
 .global-player img {
   width: var(--s4);
   height: var(--s4);
 }
-.body-radio .global-player .track-info {
-  display: none;
-}
 .global-player .artist {
   font-size: var(--s-1);
+}
+.global-player .progress-bar {
+  position: absolute;
+  top: calc(var(--s-4) * -1);
+  left: 0;
+  right: 0;
+}
+.progress-bar .outer {
+  height: var(--s-4);
+  background: #ddd;
+  cursor: pointer;
+}
+.progress-bar .inner {
+  height: var(--s-4);
+  background: black;
 }
 
 .latest-tracks {
@@ -130,4 +135,9 @@ header {
 
 .latest-tracks {
   padding-bottom: var(--s4);
+}
+
+.queues .cover {
+  width: var(--s3);
+  height: var(--s3);
 }

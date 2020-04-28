@@ -38,7 +38,8 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing =
             in
             div
                 [ class "global-player" ]
-                [ node "cluster-l"
+                [ viewProgressBar seekTo track
+                , node "cluster-l"
                     [ attribute "space" "0px" ]
                     [ div
                         [ class "controls" ]
@@ -67,7 +68,6 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing =
                             [ div [ class "title" ] [ text track.title ]
                             , div [ class "artist" ] [ text ("by " ++ track.artist) ]
                             ]
-                        , viewProgressBar seekTo track
                         ]
                     ]
                 ]
