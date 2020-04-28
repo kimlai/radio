@@ -72,7 +72,7 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing hideTrack =
                                 , div
                                     [ class "track-info" ]
                                     [ node "stack-l"
-                                        [ attribute "space" "var(--s-2)" ]
+                                        [ attribute "space" "var(--s-3)" ]
                                         [ div [ class "title" ] [ text track.title ]
                                         , div [ class "artist" ] [ text ("by " ++ track.artist) ]
                                         ]

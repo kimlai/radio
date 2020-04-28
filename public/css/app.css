@@ -37,13 +37,14 @@ header {
 }
 
 .navigation li {
-  padding: 0 var(--s0);
 }
 .navigation a {
+  padding: var(--s-2) var(--s1);
   text-decoration: none;
 }
 .navigation .active {
-  text-decoration: underline;
+  background: black;
+  color: white;
 }
 
 .radio-track .track-info {
@@ -95,8 +96,8 @@ header {
 }
 
 .global-player .cover {
-  width: var(--s4);
-  max-height: var(--s4);
+  width: var(--s3);
+  max-height: var(--s3);
 }
 .global-player .track {
   display: flex;
