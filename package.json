@@ -1,0 +1,24 @@
+{
+  "name": "radio",
+  "version": "1.0.0",
+  "description": "A music webradio",
+  "scripts": {
+    "deploy": "cd elm && elm make --yes src/Radio/Main.elm --output ../public/js/radio.js"
+  },
+  "devDependencies": {
+    "elm": "^0.18.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kimlai/radio.git"
+  },
+  "author": "Kim Laï TRINH",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kimlai/radio/issues"
+  },
+  "homepage": "https://radio.kimlaitrinh.me",
+  "dependencies": {
+    "terser": "^4.6.12"
+  }
+}
