@@ -159,8 +159,8 @@ ul.latest-tracks {
 }
 
 .queue-tracks .cover img {
-  width: var(--s3);
-  height: var(--s3);
+  width: var(--s4);
+  height: var(--s4);
 }
 
 .queues .nav a {
