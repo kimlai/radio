@@ -46,7 +46,7 @@ const addStreamingInfo = track => {
   throw new Error("Source non reconnue");
 };
 
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 20;
 const paginate = tracks => {
   const pages = R.splitEvery(PAGE_SIZE, tracks);
   return pages.map((pageTracks, i) => ({
