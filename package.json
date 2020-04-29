@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "A music webradio",
   "scripts": {
-    "deploy": "cd elm && elm make --yes src/Radio/Main.elm --output ../public/js/radio.js"
+    "deploy": "npm run api:build && npm run elm:build",
+    "elm:build": "cd elm && elm make --yes src/Radio/Main.elm --output ../public/js/radio.js",
+    "api:build": "node build.js"
   },
   "devDependencies": {
-    "elm": "^0.18.0"
+    "elm": "^0.18.0",
+    "ramda": "^0.27.0"
   },
   "repository": {
     "type": "git",

@@ -92,25 +92,6 @@ viewShowRadioPlaylistToggle followLink =
         [ Icons.playlist ]
 
 
-viewLikeButton : (TrackId -> msg) -> (TrackId -> msg) -> Track -> Html msg
-viewLikeButton addLike removeLike track =
-    if track.liked then
-        div
-            [ class "unlike"
-            , alt "Unlike"
-            , onClick (removeLike track.id)
-            ]
-            [ Icons.heart ]
-
-    else
-        div
-            [ class "like"
-            , alt "Like"
-            , onClick (addLike track.id)
-            ]
-            [ Icons.heart ]
-
-
 viewProgressBar : (Float -> msg) -> Track -> Html msg
 viewProgressBar seekTo track =
     div

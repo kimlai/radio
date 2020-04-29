@@ -131,7 +131,7 @@ update message model =
 
                 Just url ->
                     ( updateModel model markAsFetching
-                    , Http.send (FetchedMore playlistId autoplay) (Api.fetchPlaylist "/public/json/playlist.json" Api.decodeTrack)
+                    , Http.send (FetchedMore playlistId autoplay) (Api.fetchPlaylist url Api.decodeTrack)
                     )
 
         UpdateCurrentTime newTime ->

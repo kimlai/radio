@@ -34,14 +34,12 @@ decodePlaylist trackDecoder =
 decodeTrack : Json.Decode.Decoder Track
 decodeTrack =
     Json.Decode.succeed Track
-        |: field "id" Json.Decode.string
+        |: field "id" Json.Decode.int
         |: field "artist" Json.Decode.string
         |: field "cover" (Json.Decode.Extra.withDefault "/images/placeholder.jpg" Json.Decode.string)
         |: field "title" Json.Decode.string
         |: decodeStreamingInfo
         |: field "source" Json.Decode.string
-        |: field "created_at" Json.Decode.Extra.date
-        |: field "liked" (Json.Decode.Extra.withDefault False Json.Decode.bool)
         |: Json.Decode.succeed 0
         |: Json.Decode.succeed 0
         |: Json.Decode.succeed False

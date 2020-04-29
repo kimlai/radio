@@ -38,9 +38,9 @@ init location =
     let
         model =
             { tracks = Tracklist.empty
-            , radio = Radio.Model.emptyPlaylist Radio "/api/playlist"
+            , radio = Radio.Model.emptyPlaylist Radio "/public/json/tracks/page_1.json"
             , showRadioPlaylist = False
-            , latestTracks = Radio.Model.emptyPlaylist LatestTracks "/api/latest-tracks"
+            , latestTracks = Radio.Model.emptyPlaylist LatestTracks "/public/json/tracks/page_1.json"
             , played = []
             , playing = False
             , currentPage = route location
@@ -54,7 +54,7 @@ init location =
             Update.update (NavigateTo (route location))
 
         initializeRadio =
-            Http.send (FetchedMore Radio False) (Api.fetchPlaylist "/public/json/playlist.json" Api.decodeTrack)
+            Http.send (FetchedMore Radio False) (Api.fetchPlaylist "/public/json/tracks/page_1.json" Api.decodeTrack)
 
         fetchLatestTracks =
             Update.update (FetchMore LatestTracks False)
