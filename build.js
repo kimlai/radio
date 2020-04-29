@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 const R = require("ramda");
 
 /*
@@ -12,6 +13,8 @@ const R = require("ramda");
  * cover
  * ------
  */
+const NUMBER_OF_PLAYLISTS = 30;
+const PAGE_SIZE = 20;
 
 const contents = fs.readFileSync("./tracks", "utf8");
 
@@ -46,7 +49,6 @@ const addStreamingInfo = track => {
   throw new Error("Source non reconnue");
 };
 
-const PAGE_SIZE = 20;
 const paginate = tracks => {
   const pages = R.splitEvery(PAGE_SIZE, tracks);
   return pages.map((pageTracks, i) => ({
@@ -58,8 +60,35 @@ const paginate = tracks => {
   }));
 };
 
-const writeJsonFile = (file, contents) =>
+const writeJSONFile = (file, contents) => {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, JSON.stringify(contents));
+};
+
+const shuffle = array => {
+  const a = array.slice();
+  let j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+  return a;
+};
+
+const buildPlaylists = tracks => {
+  const playlists = [];
+  for (let i = 0; i < NUMBER_OF_PLAYLISTS; i++) {
+    playlists.push(shuffle(tracks));
+  }
+
+  return playlists;
+};
+
+const writeJSONFiles = dest => files => {
+  files.map((file, i) => writeJSONFile(dest + (i + 1) + ".json", file));
+};
 
 const res = R.pipe(
   splitByEmptyLine,
@@ -68,9 +97,16 @@ const res = R.pipe(
   R.map(customFormatToObject),
   R.map(addStreamingInfo),
   tracks => tracks.map((t, i) => R.assoc("id", i, t)),
-  paginate,
-  pages =>
-    pages.map((page, i) =>
-      writeJsonFile("public/json/tracks/page_" + (i + 1) + ".json", page)
+  R.tap(
+    R.pipe(
+      buildPlaylists,
+      R.map(paginate),
+      playlists =>
+        playlists.map((playlist, i) =>
+          writeJSONFiles("public/json/playlists/" + i + "/page_")(playlist)
+        )
     )
+  ),
+  paginate,
+  writeJSONFiles("public/json/tracks/page_")
 )(contents);

@@ -2,6 +2,7 @@ port module Radio.Main exposing (..)
 
 import Api
 import Http
+import Json.Decode exposing (field)
 import Keyboard
 import Model
 import Navigation exposing (Location)
@@ -17,9 +18,9 @@ import Tracklist
 import Update exposing (addCmd, andThen)
 
 
-main : Program Never Model Msg
+main : Program String Model Msg
 main =
-    Navigation.program
+    Navigation.programWithFlags
         (\location -> NavigateTo (route location))
         { init = init
         , view = View.view
@@ -33,12 +34,19 @@ route location =
     Radio.Router.urlToPage location.pathname
 
 
-init : Location -> ( Radio.Model.Model, Cmd Msg )
-init location =
+init : String -> Location -> ( Radio.Model.Model, Cmd Msg )
+init flags location =
     let
+        playlistId =
+            Json.Decode.decodeString (field "playlistId" Json.Decode.int) flags
+                |> Result.withDefault 0
+
+        playlistUrl =
+            "/public/json/playlists/" ++ toString playlistId ++ "/page_1.json"
+
         model =
             { tracks = Tracklist.empty
-            , radio = Radio.Model.emptyPlaylist Radio "/public/json/tracks/page_1.json"
+            , radio = Radio.Model.emptyPlaylist Radio playlistUrl
             , showRadioPlaylist = False
             , latestTracks = Radio.Model.emptyPlaylist LatestTracks "/public/json/tracks/page_1.json"
             , played = []
@@ -54,7 +62,7 @@ init location =
             Update.update (NavigateTo (route location))
 
         initializeRadio =
-            Http.send (FetchedMore Radio False) (Api.fetchPlaylist "/public/json/tracks/page_1.json" Api.decodeTrack)
+            Http.send (FetchedMore Radio False) (Api.fetchPlaylist playlistUrl Api.decodeTrack)
 
         fetchLatestTracks =
             Update.update (FetchMore LatestTracks False)
