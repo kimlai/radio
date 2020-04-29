@@ -49,7 +49,7 @@ view model =
             , div
                 [ class "main" ]
                 [ node "center-l"
-                    [ attribute "gutters" "var(--s0)" ]
+                    [ attribute "gutters" "var(--s1)", attribute "intrinsic" "true" ]
                     [ case model.currentPage of
                         RadioPage ->
                             let
@@ -119,34 +119,26 @@ viewRadioTrack track currentPlaylist =
             in
             div
                 [ classList [ ( "radio-track", True ), ( "inactive", currentPlaylist /= Just Radio ) ] ]
-                [ node "sidebar-l"
-                    []
-                    [ div []
-                        [ div
-                            [ class "radio-cover" ]
-                            [ img
-                                [ class "cover"
-                                , src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t500x500") track.artwork_url)
-                                , alt ""
-                                ]
-                                []
+                [ div
+                    [ class "radio-cover" ]
+                    [ img
+                        [ class "cover"
+                        , src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t500x500") track.artwork_url)
+                        , alt ""
+                        ]
+                        []
+                    ]
+                , div [ class "track-info" ]
+                    [ h1 [ class "title" ] [ text track.title ]
+                    , div [ class "artist" ] [ text ("by " ++ track.artist) ]
+                    , div
+                        [ class "source" ]
+                        [ span [] [ text "on " ]
+                        , a
+                            [ href track.sourceUrl
+                            , target "_blank"
                             ]
-                        , div [ class "track-info" ]
-                            [ node "stack-l"
-                                []
-                                [ h1 [ class "title" ] [ text track.title ]
-                                , div [ class "artist" ] [ text ("by " ++ track.artist) ]
-                                , div
-                                    [ class "source" ]
-                                    [ span [] [ text "on " ]
-                                    , a
-                                        [ href track.sourceUrl
-                                        , target "_blank"
-                                        ]
-                                        [ text source ]
-                                    ]
-                                ]
-                            ]
+                            [ text source ]
                         ]
                     ]
                 , if currentPlaylist /= Just Radio then
