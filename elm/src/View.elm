@@ -1,6 +1,6 @@
 module View exposing (..)
 
-import Html exposing (Html, a, div, img, li, nav, node, text, ul)
+import Html exposing (Html, a, div, img, li, nav, node, span, text, ul)
 import Html.Attributes exposing (..)
 import Html.Events exposing (on, onClick, onWithOptions)
 import Html.Extra exposing (link)
@@ -80,6 +80,8 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing hideTrack =
                                 ]
                         ]
                     ]
+                , div [ class "personal-website-link" ]
+                    [ span [] [ text "a website by " ], a [ href "https://kimlaitrinh.me" ] [ text "Kim Laï" ] ]
                 ]
 
 

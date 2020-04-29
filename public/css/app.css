@@ -205,3 +205,11 @@ ul.queue-tracks {
   padding: var(--s-1) var(--s1);
   font-weight: 700;
 }
+
+.personal-website-link {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: var(--s-1);
+  font-size: var(--s-1);
+}
