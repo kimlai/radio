@@ -80,8 +80,6 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing hideTrack =
                                 ]
                         ]
                     ]
-                , div [ class "personal-website-link" ]
-                    [ span [] [ text "a website by " ], a [ href "https://kimlaitrinh.me" ] [ text "Kim Laï" ] ]
                 ]
 
 

@@ -98,6 +98,9 @@ view model =
                 model.playing
                 (Player.currentPlaylist model.player == Just Radio && model.currentPage == RadioPage)
             ]
+        , div
+            [ class "personal-website-link" ]
+            [ span [] [ text "a website by " ], a [ href "https://kimlaitrinh.me" ] [ text "Kim Laï" ] ]
         ]
 
 

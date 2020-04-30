@@ -71,10 +71,20 @@ header {
     margin-top: var(--s-1);
   }
 }
+@media (max-width: 600px) {
+  .radio-track .title {
+    font-size: var(--s1);
+  }
+}
 
 .radio-cover {
   max-width: 400px;
   max-height: 400px;
+}
+@media (max-width: 600px) {
+  .radio-cover {
+    padding: 0 var(--s0);
+  }
 }
 .radio-cover {
   width: 100%;
@@ -84,6 +94,11 @@ header {
 .radio-track .artist {
   font-size: var(--s1);
   line-height: var(--line-height-small);
+}
+@media (max-width: 600px) {
+  .radio-track .artist {
+    font-size: var(--s0);
+  }
 }
 
 .radio-track .resume-radio {
@@ -210,6 +225,14 @@ ul.queue-tracks {
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: var(--s-1);
+  padding: var(--s0);
   font-size: var(--s-1);
+}
+@media (max-width: 900px) {
+  .personal-website-link {
+    position: inherit;
+    padding-top: 0;
+    padding-bottom: var(--s-1);
+    text-align: center;
+  }
 }
