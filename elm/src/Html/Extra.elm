@@ -1,13 +1,12 @@
 module Html.Extra exposing (link)
 
-
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode
 
 
-link : (String -> msg ) -> String -> List (Attribute msg) -> List (Html msg) -> Html msg
+link : (String -> msg) -> String -> List (Attribute msg) -> List (Html msg) -> Html msg
 link followLink target attributes children =
     a
         (List.append

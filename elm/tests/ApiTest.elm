@@ -4,9 +4,9 @@ import Api
 import Date
 import Expect
 import Json.Decode
-import Track exposing (StreamingInfo(..))
 import String
 import Test exposing (..)
+import Track exposing (StreamingInfo(..))
 
 
 all : Test
@@ -33,19 +33,20 @@ all =
                     """
                     |> Result.toMaybe
                     |> Expect.equal
-                        (Just { id = "280751017"
-                        , artist = "LeMellotron"
-                        , artwork_url = "https://i1.sndcdn.com/artworks-000179793600-5aot2t-large.jpg"
-                        , title = "Zerolex"
-                        , streamingInfo = Soundcloud "https://api.soundcloud.com/tracks/280751017/stream"
-                        , sourceUrl = "http://soundcloud.com/lemellotron/zerolex-family-tree"
-                        , createdAt = Date.fromTime 1472655571000
-                        , liked = False
-                        , progress = 0
-                        , currentTime = 0
-                        , error = False
-                        })
-
+                        (Just
+                            { id = "280751017"
+                            , artist = "LeMellotron"
+                            , artwork_url = "https://i1.sndcdn.com/artworks-000179793600-5aot2t-large.jpg"
+                            , title = "Zerolex"
+                            , streamingInfo = Soundcloud "https://api.soundcloud.com/tracks/280751017/stream"
+                            , sourceUrl = "http://soundcloud.com/lemellotron/zerolex-family-tree"
+                            , createdAt = Date.fromTime 1472655571000
+                            , liked = False
+                            , progress = 0
+                            , currentTime = 0
+                            , error = False
+                            }
+                        )
         , test "Youtube tracks" <|
             \() ->
                 Json.Decode.decodeString
@@ -65,16 +66,18 @@ all =
                     """
                     |> Result.toMaybe
                     |> Expect.equal
-                        (Just { id = "280751017"
-                        , artist = "LeMellotron"
-                        , artwork_url = "https://i1.sndcdn.com/artworks-000179793600-5aot2t-large.jpg"
-                        , title = "Zerolex"
-                        , streamingInfo = Youtube "fakeYoutubeId"
-                        , sourceUrl = "http://soundcloud.com/lemellotron/zerolex-family-tree"
-                        , createdAt = Date.fromTime 1472655571000
-                        , liked = False
-                        , progress = 0
-                        , currentTime = 0
-                        , error = False
-                        })
+                        (Just
+                            { id = "280751017"
+                            , artist = "LeMellotron"
+                            , artwork_url = "https://i1.sndcdn.com/artworks-000179793600-5aot2t-large.jpg"
+                            , title = "Zerolex"
+                            , streamingInfo = Youtube "fakeYoutubeId"
+                            , sourceUrl = "http://soundcloud.com/lemellotron/zerolex-family-tree"
+                            , createdAt = Date.fromTime 1472655571000
+                            , liked = False
+                            , progress = 0
+                            , currentTime = 0
+                            , error = False
+                            }
+                        )
         ]

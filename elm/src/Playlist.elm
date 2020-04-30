@@ -1,14 +1,21 @@
 module Playlist exposing
     ( Playlist
+    , append
+    , currentItem
     , empty
-    , append, prepend, remove
-    , currentItem, next, select, items, upcoming
+    , items
+    , next
+    , prepend
+    , remove
+    , select
+    , upcoming
     )
 
 import Array exposing (Array)
 
-type Playlist a =
-    Playlist
+
+type Playlist a
+    = Playlist
         { items : Array a
         , position : Int
         }
@@ -33,7 +40,7 @@ append newItems (Playlist { items, position }) =
 prepend : a -> Playlist a -> Playlist a
 prepend item (Playlist { items, position }) =
     Playlist
-        { items = Array.append (Array.fromList [item]) items
+        { items = Array.append (Array.fromList [ item ]) items
         , position = position + 1
         }
 
@@ -43,16 +50,19 @@ remove item playlist =
     let
         (Playlist { items, position }) =
             playlist
-        current = currentItem playlist
+
+        current =
+            currentItem playlist
+
         matchCountBeforePosition =
             Array.slice 0 position items
                 |> Array.filter ((==) item)
                 |> Array.length
     in
-        Playlist
-            { items = Array.filter ((/=) item) items
-            , position = position - matchCountBeforePosition
-            }
+    Playlist
+        { items = Array.filter ((/=) item) items
+        , position = position - matchCountBeforePosition
+        }
 
 
 next : Playlist a -> Playlist a

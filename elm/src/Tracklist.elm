@@ -1,12 +1,11 @@
 module Tracklist exposing (..)
 
-
 import Dict exposing (Dict)
 import Track exposing (Track, TrackId)
 
 
-type Tracklist =
-    Tracklist (Dict TrackId Track)
+type Tracklist
+    = Tracklist (Dict TrackId Track)
 
 
 empty : Tracklist

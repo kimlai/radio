@@ -26,7 +26,6 @@ all =
                         }
                         """
                 in
-                    Json.Decode.decodeString View.decodeClickXPosition event
-                        |> Expect.equal (Ok 100)
-
+                Json.Decode.decodeString View.decodeClickXPosition event
+                    |> Expect.equal (Ok 100)
         ]
