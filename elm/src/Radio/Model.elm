@@ -2,7 +2,6 @@ module Radio.Model exposing (..)
 
 import Model exposing (NavigationItem)
 import Player exposing (Player)
-import Time exposing (Time)
 import Track exposing (Track, TrackId)
 import Tracklist exposing (Tracklist)
 
@@ -16,7 +15,6 @@ type alias Model =
     , playing : Bool
     , currentPage : Page
     , lastKeyPressed : Maybe Char
-    , currentTime : Maybe Time
     , player : Player PlaylistId TrackId
     , navigation : List (NavigationItem Page PlaylistId)
     }

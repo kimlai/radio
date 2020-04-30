@@ -12,7 +12,6 @@ import Radio.Model as Model exposing (Model, Page(..), PlaylistId(..), PlaylistS
 import Radio.Ports as Ports
 import Radio.Router
 import Task exposing (Task)
-import Time exposing (Time)
 import Track exposing (StreamingInfo(..), Track, TrackId)
 import Tracklist
 import Update
@@ -30,7 +29,6 @@ type Msg
     | FollowLink String
     | NavigateTo Page
     | KeyPressed Keyboard.KeyCode
-    | UpdateCurrentTime Time
     | PlayFromPlaylist PlaylistId Int
     | PlayOutsidePlaylist TrackId
     | FetchMore PlaylistId Bool
@@ -133,9 +131,6 @@ update message model =
                     ( updateModel model markAsFetching
                     , Http.send (FetchedMore playlistId autoplay) (Api.fetchPlaylist url Api.decodeTrack)
                     )
-
-        UpdateCurrentTime newTime ->
-            ( { model | currentTime = Just newTime }, Cmd.none )
 
         Play ->
             case Model.currentTrack model of

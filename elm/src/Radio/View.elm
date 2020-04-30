@@ -9,7 +9,6 @@ import Player
 import Radio.Model as Model exposing (Model, Page(..), Playlist, PlaylistId(..), PlaylistStatus(..))
 import Radio.Update exposing (Msg(..))
 import Regex
-import Time exposing (Time)
 import Track exposing (StreamingInfo(..), Track, TrackId)
 import Tracklist exposing (Tracklist)
 import View
@@ -80,7 +79,6 @@ view model =
                         LatestTracksPage ->
                             viewLatestTracks
                                 (Player.currentTrack model.player)
-                                model.currentTime
                                 model.tracks
                                 model.latestTracks
                                 (Player.playlistContent LatestTracks model.player)
@@ -302,8 +300,8 @@ viewRadioPlaylistTrack currentTrackId position track =
         ]
 
 
-viewLatestTracks : Maybe TrackId -> Maybe Time -> Tracklist -> Playlist -> List TrackId -> Html Msg
-viewLatestTracks currentTrackId currentTime tracks playlist playlistContent =
+viewLatestTracks : Maybe TrackId -> Tracklist -> Playlist -> List TrackId -> Html Msg
+viewLatestTracks currentTrackId tracks playlist playlistContent =
     let
         playlistTracks =
             Tracklist.getTracks playlistContent tracks
@@ -324,7 +322,7 @@ viewLatestTracks currentTrackId currentTime tracks playlist playlistContent =
                     text ""
 
         tracksView =
-            List.indexedMap (viewTrack currentTrackId currentTime playlist.id) playlistTracks
+            List.indexedMap (viewTrack currentTrackId playlist.id) playlistTracks
     in
     node "stack-l"
         [ attribute "space" "var(--s4)" ]
@@ -335,8 +333,8 @@ viewLatestTracks currentTrackId currentTime tracks playlist playlistContent =
         ]
 
 
-viewTrack : Maybe TrackId -> Maybe Time -> PlaylistId -> Int -> Track -> Html Msg
-viewTrack currentTrackId currentTime playlistId position track =
+viewTrack : Maybe TrackId -> PlaylistId -> Int -> Track -> Html Msg
+viewTrack currentTrackId playlistId position track =
     let
         source =
             case track.streamingInfo of

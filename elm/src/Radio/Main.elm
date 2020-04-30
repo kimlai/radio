@@ -13,7 +13,6 @@ import Radio.Router
 import Radio.Update as Update exposing (Msg(..))
 import Radio.View as View
 import Task
-import Time exposing (Time)
 import Tracklist
 import Update exposing (addCmd, andThen)
 
@@ -53,7 +52,6 @@ init flags location =
             , playing = False
             , currentPage = route location
             , lastKeyPressed = Nothing
-            , currentTime = Nothing
             , player = Player.initialize [ Radio, LatestTracks ]
             , navigation = navigation
             }
@@ -66,15 +64,11 @@ init flags location =
 
         fetchLatestTracks =
             Update.update (FetchMore LatestTracks False)
-
-        setCurrentTime =
-            Task.perform UpdateCurrentTime Time.now
     in
     model
         |> navigateToLocation
         |> andThen fetchLatestTracks
         |> addCmd initializeRadio
-        |> addCmd setCurrentTime
 
 
 
