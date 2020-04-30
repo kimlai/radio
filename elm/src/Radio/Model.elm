@@ -1,6 +1,5 @@
 module Radio.Model exposing (..)
 
-import Date exposing (Date)
 import Model exposing (NavigationItem)
 import Player exposing (Player)
 import Time exposing (Time)
