@@ -1,8 +1,5 @@
 module Track exposing (..)
 
-import Date exposing (Date)
-import Youtube exposing (YoutubeId)
-
 
 type alias TrackId =
     Int
@@ -27,6 +24,10 @@ type StreamingInfo
 
 
 type alias StreamUrl =
+    String
+
+
+type alias YoutubeId =
     String
 
 
