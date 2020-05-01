@@ -37,21 +37,10 @@
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
       function onYouTubeIframeAPIReady() {
-        var app = Elm.Radio.Main.fullscreen(
-          JSON.stringify({
-            playlistId: Math.floor(Math.random() * 29)
-          })
-        );
-
+        var app = Elm.Radio.Main.init({
+          flags: Math.floor(Math.random() * 29)
+        });
         app = initializePlayer("cc1bf58dc4b00ed757ab2f76deaa3d70", app);
-
-        app.ports.scroll.subscribe(function(offset) {
-          window.scrollBy(0, offset);
-        });
-
-        app.ports.storeAuthToken.subscribe(function(token) {
-          window.localStorage.setItem("authToken", token);
-        });
       }
     </script>
   </body>

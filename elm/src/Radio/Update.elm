@@ -1,11 +1,11 @@
 module Radio.Update exposing (..)
 
 import Api
+import Browser exposing (UrlRequest(..))
+import Browser.Navigation as Nav
 import Char
 import Http exposing (Error(..))
 import Json.Decode
-import Keyboard
-import Navigation
 import Player
 import PlayerEngine
 import Radio.Model as Model exposing (Model, Page(..), PlaylistId(..), PlaylistStatus(..))
@@ -15,6 +15,7 @@ import Task exposing (Task)
 import Track exposing (StreamingInfo(..), Track, TrackId)
 import Tracklist
 import Update
+import Url exposing (Url)
 
 
 type Msg
@@ -26,9 +27,8 @@ type Msg
     | TrackError TrackId
     | FastForward
     | Rewind
-    | FollowLink String
-    | NavigateTo Page
-    | KeyPressed Keyboard.KeyCode
+    | LinkClicked UrlRequest
+    | UrlChanged Url
     | PlayFromPlaylist PlaylistId Int
     | PlayOutsidePlaylist TrackId
     | FetchMore PlaylistId Bool
@@ -84,7 +84,7 @@ update message model =
                     Player.select playlistId position model.player
 
                 msg =
-                    if Player.currentTrack player == Player.currentTrack model.player then
+                    if Player.getCurrentTrack player == Player.getCurrentTrack model.player then
                         TogglePlayback
 
                     else
@@ -100,7 +100,7 @@ update message model =
                     Player.selectOutsidePlaylist trackId model.player
 
                 msg =
-                    if Player.currentTrack player == Player.currentTrack model.player then
+                    if Player.getCurrentTrack player == Player.getCurrentTrack model.player then
                         TogglePlayback
 
                     else
@@ -112,16 +112,16 @@ update message model =
 
         FetchMore playlistId autoplay ->
             let
-                markAsFetching playlist =
-                    { playlist | status = Fetching }
+                markAsFetching p =
+                    { p | status = Fetching }
 
                 ( playlist, updateModel ) =
                     case playlistId of
                         Radio ->
-                            ( model.radio, \model fn -> { model | radio = fn model.radio } )
+                            ( model.radio, \m fn -> { m | radio = fn model.radio } )
 
                         LatestTracks ->
-                            ( model.latestTracks, \model fn -> { model | latestTracks = fn model.latestTracks } )
+                            ( model.latestTracks, \m fn -> { m | latestTracks = fn model.latestTracks } )
             in
             case playlist.nextLink of
                 Nothing ->
@@ -129,7 +129,10 @@ update message model =
 
                 Just url ->
                     ( updateModel model markAsFetching
-                    , Http.send (FetchedMore playlistId autoplay) (Api.fetchPlaylist url Api.decodeTrack)
+                    , Http.get
+                        { url = url
+                        , expect = Http.expectJson (FetchedMore playlistId autoplay) Api.decodePlaylist
+                        }
                     )
 
         Play ->
@@ -141,12 +144,12 @@ update message model =
 
                 Just track ->
                     let
-                        resetTrack track =
-                            if track.progress > 99.9 then
-                                { track | currentTime = 0, progress = 0 }
+                        resetTrack t =
+                            if t.progress > 99.9 then
+                                { t | currentTime = 0, progress = 0 }
 
                             else
-                                track
+                                t
 
                         updatePlayedTracks tracks =
                             if List.head tracks /= Just track.id && track.progress == 0 then
@@ -167,7 +170,7 @@ update message model =
 
         Pause ->
             ( { model | playing = False }
-            , PlayerEngine.pause (Player.currentTrack model.player)
+            , PlayerEngine.pause (Player.getCurrentTrack model.player)
             )
 
         ResumeRadio ->
@@ -181,7 +184,9 @@ update message model =
                 ( newModelWithNext, command ) =
                     update Next newModel
             in
-            newModelWithNext ! [ command ]
+            ( newModelWithNext
+            , command
+            )
 
         TogglePlayback ->
             if model.playing then
@@ -193,10 +198,10 @@ update message model =
         Next ->
             let
                 currentPlaylist =
-                    Player.currentPlaylist model.player
+                    Player.getCurrentPlaylist model.player
 
                 nextTrack =
-                    (Player.currentTrack << Player.next) model.player
+                    (Player.getCurrentTrack << Player.next) model.player
             in
             case nextTrack of
                 Just track ->
@@ -217,13 +222,18 @@ update message model =
             , Cmd.none
             )
 
-        NavigateTo page ->
-            ( { model | currentPage = page }, Cmd.none )
+        LinkClicked urlRequest ->
+            case urlRequest of
+                Internal url ->
+                    ( model
+                    , Nav.pushUrl model.key (Url.toString url)
+                    )
 
-        FollowLink url ->
-            ( model
-            , Navigation.newUrl url
-            )
+                External href ->
+                    ( model, Nav.load href )
+
+        UrlChanged url ->
+            ( { model | currentPage = Radio.Router.urlToPage url }, Cmd.none )
 
         SeekTo positionInPercentage ->
             ( model
@@ -244,48 +254,3 @@ update message model =
             ( { model | showRadioPlaylist = not model.showRadioPlaylist }
             , Cmd.none
             )
-
-        KeyPressed keyCode ->
-            case Char.fromCode keyCode of
-                'n' ->
-                    update Next model
-
-                'p' ->
-                    update TogglePlayback model
-
-                'l' ->
-                    update FastForward model
-
-                'h' ->
-                    update Rewind model
-
-                'j' ->
-                    ( model
-                    , Ports.scroll 120
-                    )
-
-                'k' ->
-                    ( model
-                    , Ports.scroll -120
-                    )
-
-                'g' ->
-                    if model.lastKeyPressed == Just 'g' then
-                        ( { model | lastKeyPressed = Nothing }
-                        , Ports.scroll -9999999
-                        )
-
-                    else
-                        ( { model | lastKeyPressed = Just 'g' }
-                        , Cmd.none
-                        )
-
-                'G' ->
-                    ( model
-                    , Ports.scroll 99999999
-                    )
-
-                _ ->
-                    ( model
-                    , Cmd.none
-                    )

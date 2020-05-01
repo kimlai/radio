@@ -176,13 +176,13 @@ moveTrack playlistId track (Player { playlists, currentPlaylist, currentTrack })
         }
 
 
-currentPlaylist : Player a b -> Maybe a
-currentPlaylist (Player { currentPlaylist }) =
+getCurrentPlaylist : Player a b -> Maybe a
+getCurrentPlaylist (Player { currentPlaylist }) =
     currentPlaylist
 
 
-currentTrack : Player a b -> Maybe b
-currentTrack (Player { currentTrack }) =
+getCurrentTrack : Player a b -> Maybe b
+getCurrentTrack (Player { currentTrack }) =
     currentTrack
 
 
@@ -203,7 +203,7 @@ playlistContent playlistId (Player { playlists }) =
         |> List.head
         |> Maybe.withDefault ( playlistId, Playlist.empty )
         |> Tuple.second
-        |> Playlist.items
+        |> Playlist.getItems
 
 
 upcoming : a -> Player a b -> List ( Int, b )

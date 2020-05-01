@@ -2,26 +2,17 @@ module View exposing (..)
 
 import Html exposing (Html, a, div, img, li, nav, node, span, text, ul)
 import Html.Attributes exposing (..)
-import Html.Events exposing (on, onClick, onWithOptions)
+import Html.Events exposing (on, onClick)
 import Html.Extra exposing (link)
 import Icons
 import Json.Decode exposing (field)
-import Json.Decode.Extra exposing ((|:))
 import Model exposing (NavigationItem)
 import Track exposing (Track, TrackId)
 
 
-viewGlobalPlayer :
-    (String -> msg)
-    -> msg
-    -> msg
-    -> (Float -> msg)
-    -> Maybe Track
-    -> Bool
-    -> Bool
-    -> Html msg
-viewGlobalPlayer followLink tooglePlayback next seekTo track playing hideTrack =
-    case track of
+viewGlobalPlayer : msg -> msg -> (Float -> msg) -> Maybe Track -> Bool -> Bool -> Html msg
+viewGlobalPlayer tooglePlayback next seekTo maybeTrack playing hideTrack =
+    case maybeTrack of
         Nothing ->
             text ""
 
@@ -44,7 +35,7 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing hideTrack =
                     []
                     [ div
                         [ class "controls" ]
-                        [ viewShowRadioPlaylistToggle followLink
+                        [ viewShowRadioPlaylistToggle
                         , div
                             [ classList
                                 [ ( "playback-button", True )
@@ -83,10 +74,9 @@ viewGlobalPlayer followLink tooglePlayback next seekTo track playing hideTrack =
                 ]
 
 
-viewShowRadioPlaylistToggle : (String -> msg) -> Html msg
-viewShowRadioPlaylistToggle followLink =
+viewShowRadioPlaylistToggle : Html msg
+viewShowRadioPlaylistToggle =
     link
-        followLink
         "/queue/next"
         [ class "show-radio-playlist" ]
         [ Icons.playlist ]
@@ -102,7 +92,7 @@ viewProgressBar seekTo track =
             [ class "outer" ]
             [ div
                 [ class "inner"
-                , style [ ( "width", toString track.progress ++ "%" ) ]
+                , style "width" (String.fromFloat track.progress ++ "%")
                 ]
                 []
             ]
@@ -148,13 +138,13 @@ instanciateElement offsetLeft offsetParent =
 
 decodeElement : Json.Decode.Decoder Element
 decodeElement =
-    Json.Decode.succeed instanciateElement
-        |: field "offsetLeft" Json.Decode.float
-        |: field "offsetParent" (Json.Decode.nullable (Json.Decode.lazy (\_ -> decodeElement)))
+    Json.Decode.map2 instanciateElement
+        (field "offsetLeft" Json.Decode.float)
+        (field "offsetParent" (Json.Decode.nullable (Json.Decode.lazy (\_ -> decodeElement))))
 
 
-viewNavigation : (String -> msg) -> List (NavigationItem page playlist) -> page -> Maybe playlist -> Html msg
-viewNavigation followLink navigationItems currentPage currentPlaylist =
+viewNavigation : List (NavigationItem page playlist) -> page -> Maybe playlist -> Html msg
+viewNavigation navigationItems currentPage currentPlaylist =
     nav
         []
         [ node "cluster-l"
@@ -162,23 +152,17 @@ viewNavigation followLink navigationItems currentPage currentPlaylist =
             [ ul
                 [ class "navigation" ]
                 (List.map
-                    (viewNavigationItem followLink currentPage currentPlaylist)
+                    (viewNavigationItem currentPage currentPlaylist)
                     navigationItems
                 )
             ]
         ]
 
 
-viewNavigationItem : (String -> msg) -> page -> Maybe playlist -> NavigationItem page playlist -> Html msg
-viewNavigationItem followLink currentPage currentPlaylist navigationItem =
+viewNavigationItem : page -> Maybe playlist -> NavigationItem page playlist -> Html msg
+viewNavigationItem currentPage currentPlaylist navigationItem =
     li
-        [ onWithOptions
-            "click"
-            { stopPropagation = False
-            , preventDefault = True
-            }
-            (Json.Decode.succeed (followLink navigationItem.href))
-        ]
+        []
         [ a
             (classList
                 [ ( "active", navigationItem.page == currentPage )

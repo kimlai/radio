@@ -1,30 +1,23 @@
 module Radio.Router exposing (..)
 
 import Radio.Model exposing (Page(..))
+import Url exposing (Url)
 
 
-urlToPage : String -> Page
-urlToPage url =
-    routes
-        |> List.filter ((==) url << Tuple.first)
-        |> List.head
-        |> Maybe.map Tuple.second
-        |> Maybe.withDefault PageNotFound
+urlToPage : Url -> Page
+urlToPage { path } =
+    case path of
+        "/" ->
+            RadioPage
 
+        "/queue/played" ->
+            PlayedPage
 
-pageToUrl : Page -> String
-pageToUrl page =
-    routes
-        |> List.filter ((==) page << Tuple.second)
-        |> List.head
-        |> Maybe.map Tuple.first
-        |> Maybe.withDefault "/404"
+        "/queue/next" ->
+            UpNextPage
 
+        "/latest" ->
+            LatestTracksPage
 
-routes : List ( String, Page )
-routes =
-    [ ( "/", RadioPage )
-    , ( "/queue/played", PlayedPage )
-    , ( "/queue/next", UpNextPage )
-    , ( "/latest", LatestTracksPage )
-    ]
+        _ ->
+            PageNotFound

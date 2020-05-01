@@ -1,5 +1,6 @@
 module Radio.View exposing (..)
 
+import Browser exposing (Document)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -14,36 +15,18 @@ import Tracklist exposing (Tracklist)
 import View
 
 
-bodyClass page =
-    case page of
-        RadioPage ->
-            "body-radio"
-
-        PlayedPage ->
-            "body-played"
-
-        UpNextPage ->
-            "body-up-next"
-
-        LatestTracksPage ->
-            "body-latest-tracks"
-
-        PageNotFound ->
-            "body-not-found"
-
-
-view : Model -> Html Msg
+view : Model -> Document Msg
 view model =
-    div [ class (bodyClass model.currentPage) ]
+    { title = "Radio | Kim Laï Trinh"
+    , body =
         [ node
             "cover-l"
             [ attribute "centered" ".main", attribute "noPad" "true" ]
             [ header []
                 [ View.viewNavigation
-                    FollowLink
                     model.navigation
                     model.currentPage
-                    (Player.currentPlaylist model.player)
+                    (Player.getCurrentPlaylist model.player)
                 ]
             , div
                 [ class "main" ]
@@ -54,9 +37,9 @@ view model =
                             let
                                 currentRadioTrack =
                                     Player.currentTrackOfPlaylist Radio model.player
-                                        |> Maybe.andThen (flip Tracklist.get model.tracks)
+                                        |> Maybe.andThen (\a -> Tracklist.get a model.tracks)
                             in
-                            div [] [ viewRadioTrack currentRadioTrack (Player.currentPlaylist model.player) ]
+                            div [] [ viewRadioTrack currentRadioTrack (Player.getCurrentPlaylist model.player) ]
 
                         PlayedPage ->
                             viewPlayedTracks model.currentPage model.tracks (List.drop 1 model.played)
@@ -64,7 +47,7 @@ view model =
                         UpNextPage ->
                             let
                                 playlist =
-                                    Player.currentPlaylist model.player
+                                    Player.getCurrentPlaylist model.player
                                         |> Maybe.withDefault Radio
                             in
                             viewUpcomingTracks
@@ -78,7 +61,7 @@ view model =
 
                         LatestTracksPage ->
                             viewLatestTracks
-                                (Player.currentTrack model.player)
+                                (Player.getCurrentTrack model.player)
                                 model.tracks
                                 model.latestTracks
                                 (Player.playlistContent LatestTracks model.player)
@@ -88,23 +71,23 @@ view model =
                     ]
                 ]
             , View.viewGlobalPlayer
-                FollowLink
                 TogglePlayback
                 Next
                 SeekTo
                 (Model.currentTrack model)
                 model.playing
-                (Player.currentPlaylist model.player == Just Radio && model.currentPage == RadioPage)
+                (Player.getCurrentPlaylist model.player == Just Radio && model.currentPage == RadioPage)
             ]
         , div
             [ class "personal-website-link" ]
             [ span [] [ text "a website by " ], a [ href "https://kimlaitrinh.me" ] [ text "Kim Laï" ] ]
         ]
+    }
 
 
 viewRadioTrack : Maybe Track -> Maybe PlaylistId -> Html Msg
-viewRadioTrack track currentPlaylist =
-    case track of
+viewRadioTrack maybeTrack currentPlaylist =
+    case maybeTrack of
         Nothing ->
             div [] [ text "" ]
 
@@ -122,13 +105,7 @@ viewRadioTrack track currentPlaylist =
                 [ classList [ ( "radio-track", True ), ( "inactive", currentPlaylist /= Just Radio ) ] ]
                 [ div
                     [ class "radio-cover" ]
-                    [ img
-                        [ class "cover"
-                        , src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t500x500") track.artwork_url)
-                        , alt ""
-                        ]
-                        []
-                    ]
+                    [ img [ class "cover", src track.artwork_url, alt "" ] [] ]
                 , div [ class "track-info" ]
                     [ h1 [ class "title" ] [ text track.title ]
                     , div [ class "artist" ] [ text ("by " ++ track.artist) ]
@@ -169,10 +146,10 @@ viewPlayedTracks currentPage tracks playedTracks =
                     [ class "nav" ]
                     [ li
                         [ classList [ ( "active", currentPage == UpNextPage ) ] ]
-                        [ link FollowLink "/queue/next" [] [ text "Up Next" ] ]
+                        [ link "/queue/next" [] [ text "Up Next" ] ]
                     , li
                         [ classList [ ( "active", currentPage == PlayedPage ) ] ]
-                        [ link FollowLink "/queue/played" [] [ text "Played" ] ]
+                        [ link "/queue/played" [] [ text "Played" ] ]
                     ]
                 ]
             ]
@@ -203,12 +180,7 @@ viewPlayedTrack track =
             [ div []
                 [ div
                     [ class "cover" ]
-                    [ img
-                        [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url)
-                        , alt ""
-                        ]
-                        []
-                    ]
+                    [ img [ src track.artwork_url, alt "" ] [] ]
                 , div []
                     [ div [ class "title" ] [ text track.title ]
                     , div [ class "artist" ] [ text track.artist ]
@@ -230,10 +202,10 @@ viewUpcomingTracks currentPage tracks playlistId upcomingTracks =
                     [ class "nav" ]
                     [ li
                         [ classList [ ( "active", currentPage == UpNextPage ) ] ]
-                        [ link FollowLink "/queue/next" [] [ text "Up Next" ] ]
+                        [ link "/queue/next" [] [ text "Up Next" ] ]
                     , li
                         [ classList [ ( "active", currentPage == PlayedPage ) ] ]
-                        [ link FollowLink "/queue/played" [] [ text "Played" ] ]
+                        [ link "/queue/played" [] [ text "Played" ] ]
                     ]
                 ]
             , ul
@@ -256,12 +228,7 @@ viewUpcomingTrack playlistId ( position, track ) =
             [ div []
                 [ div
                     [ class "cover" ]
-                    [ img
-                        [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url)
-                        , alt ""
-                        ]
-                        []
-                    ]
+                    [ img [ src track.artwork_url, alt "" ] [] ]
                 , div []
                     [ div [ class "title" ] [ text track.title ]
                     , div [ class "artist" ] [ text track.artist ]
@@ -283,12 +250,7 @@ viewRadioPlaylistTrack currentTrackId position track =
         ]
         [ div
             [ class "cover" ]
-            [ img
-                [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url)
-                , alt ""
-                ]
-                []
-            ]
+            [ img [ src track.artwork_url, alt "" ] [] ]
         , div
             []
             [ div
@@ -357,12 +319,7 @@ viewTrack currentTrackId playlistId position track =
                 [ class "cover"
                 , onClick (PlayFromPlaylist playlistId position)
                 ]
-                [ img
-                    [ src (Regex.replace Regex.All (Regex.regex "large") (\_ -> "t200x200") track.artwork_url)
-                    , alt ""
-                    ]
-                    []
-                ]
+                [ img [ src track.artwork_url, alt "" ] [] ]
             , div
                 [ class "track-info" ]
                 [ node "stack-l"

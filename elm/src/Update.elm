@@ -10,7 +10,9 @@ andThen update ( model, cmd ) =
         ( updatedModel, newCmd ) =
             update model
     in
-    updatedModel ! [ cmd, newCmd ]
+    ( updatedModel
+    , Cmd.batch [ cmd, newCmd ]
+    )
 
 
 when :
@@ -33,4 +35,6 @@ identity model =
 
 addCmd : Cmd msg -> ( model, Cmd msg ) -> ( model, Cmd msg )
 addCmd newCmd ( model, cmd ) =
-    model ! [ cmd, newCmd ]
+    ( model
+    , Cmd.batch [ cmd, newCmd ]
+    )

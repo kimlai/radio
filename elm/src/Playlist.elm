@@ -3,7 +3,7 @@ module Playlist exposing
     , append
     , currentItem
     , empty
-    , items
+    , getItems
     , next
     , prepend
     , remove
@@ -86,8 +86,8 @@ select newPosition (Playlist { items, position }) =
         }
 
 
-items : Playlist a -> List a
-items (Playlist { items }) =
+getItems : Playlist a -> List a
+getItems (Playlist { items }) =
     Array.toList items
 
 

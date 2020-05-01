@@ -1,11 +1,11 @@
-port module Radio.Main exposing (..)
+module Radio.Main exposing (..)
 
 import Api
+import Browser
+import Browser.Navigation as Nav
 import Http
 import Json.Decode exposing (field)
-import Keyboard
 import Model
-import Navigation exposing (Location)
 import Player
 import PlayerEngine
 import Radio.Model exposing (Model, Page(..), PlaylistId(..))
@@ -15,33 +15,26 @@ import Radio.View as View
 import Task
 import Tracklist
 import Update exposing (addCmd, andThen)
+import Url exposing (Url)
 
 
-main : Program String Model Msg
+main : Program Int Model Msg
 main =
-    Navigation.programWithFlags
-        (\location -> NavigateTo (route location))
+    Browser.application
         { init = init
         , view = View.view
         , update = Update.update
         , subscriptions = subscriptions
+        , onUrlChange = UrlChanged
+        , onUrlRequest = LinkClicked
         }
 
 
-route : Location -> Page
-route location =
-    Radio.Router.urlToPage location.pathname
-
-
-init : String -> Location -> ( Radio.Model.Model, Cmd Msg )
-init flags location =
+init : Int -> Url -> Nav.Key -> ( Radio.Model.Model, Cmd Msg )
+init playlistId url key =
     let
-        playlistId =
-            Json.Decode.decodeString (field "playlistId" Json.Decode.int) flags
-                |> Result.withDefault 0
-
         playlistUrl =
-            "/public/json/playlists/" ++ toString playlistId ++ "/page_1.json"
+            "/public/json/playlists/" ++ String.fromInt playlistId ++ "/page_1.json"
 
         model =
             { tracks = Tracklist.empty
@@ -50,25 +43,18 @@ init flags location =
             , latestTracks = Radio.Model.emptyPlaylist LatestTracks "/public/json/tracks/page_1.json"
             , played = []
             , playing = False
-            , currentPage = route location
-            , lastKeyPressed = Nothing
+            , currentPage = Radio.Router.urlToPage url
             , player = Player.initialize [ Radio, LatestTracks ]
             , navigation = navigation
+            , key = key
             }
-
-        navigateToLocation =
-            Update.update (NavigateTo (route location))
-
-        initializeRadio =
-            Http.send (FetchedMore Radio False) (Api.fetchPlaylist playlistUrl Api.decodeTrack)
-
-        fetchLatestTracks =
-            Update.update (FetchMore LatestTracks False)
     in
-    model
-        |> navigateToLocation
-        |> andThen fetchLatestTracks
-        |> addCmd initializeRadio
+    ( model
+    , Http.get
+        { url = playlistUrl
+        , expect = Http.expectJson (FetchedMore Radio False) Api.decodePlaylist
+        }
+    )
 
 
 
@@ -81,7 +67,6 @@ subscriptions model =
         [ PlayerEngine.trackProgress TrackProgress
         , PlayerEngine.trackEnd (\_ -> Next)
         , PlayerEngine.trackError TrackError
-        , Keyboard.presses KeyPressed
         ]
 
 

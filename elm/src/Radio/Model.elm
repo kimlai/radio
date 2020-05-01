@@ -1,5 +1,6 @@
 module Radio.Model exposing (..)
 
+import Browser.Navigation as Nav
 import Model exposing (NavigationItem)
 import Player exposing (Player)
 import Track exposing (Track, TrackId)
@@ -14,9 +15,9 @@ type alias Model =
     , played : List TrackId
     , playing : Bool
     , currentPage : Page
-    , lastKeyPressed : Maybe Char
     , player : Player PlaylistId TrackId
     , navigation : List (NavigationItem Page PlaylistId)
+    , key : Nav.Key
     }
 
 
@@ -56,5 +57,5 @@ type PlaylistId
 
 currentTrack : Model -> Maybe Track
 currentTrack model =
-    Player.currentTrack model.player
-        |> Maybe.andThen (flip Tracklist.get model.tracks)
+    Player.getCurrentTrack model.player
+        |> Maybe.andThen (\a -> Tracklist.get a model.tracks)
