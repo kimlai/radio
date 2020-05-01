@@ -233,7 +233,9 @@ update message model =
                     ( model, Nav.load href )
 
         UrlChanged url ->
-            ( { model | currentPage = Radio.Router.urlToPage url }, Cmd.none )
+            ( { model | currentPage = Radio.Router.urlToPage url }
+            , Cmd.none
+            )
 
         SeekTo positionInPercentage ->
             ( model

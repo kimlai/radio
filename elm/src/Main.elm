@@ -50,10 +50,16 @@ init playlistId url key =
             }
     in
     ( model
-    , Http.get
-        { url = playlistUrl
-        , expect = Http.expectJson (FetchedMore Radio False) Api.decodePlaylist
-        }
+    , Cmd.batch
+        [ Http.get
+            { url = playlistUrl
+            , expect = Http.expectJson (FetchedMore Radio False) Api.decodePlaylist
+            }
+        , Http.get
+            { url = "json/tracks/page_1.json"
+            , expect = Http.expectJson (FetchedMore LatestTracks False) Api.decodePlaylist
+            }
+        ]
     )
 
 
