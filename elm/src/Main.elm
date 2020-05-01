@@ -1,4 +1,4 @@
-module Radio.Main exposing (..)
+module Main exposing (..)
 
 import Api
 import Browser
