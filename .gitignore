@@ -1,6 +1,6 @@
 node_modules
 elm/elm-stuff
-_site
-public/js/radio.js
-public/json/tracks/*.json
-public/json/playlists/*/*.json
+static/json/tracks/*.json
+static/json/playlists/*/*.json
+dist
+.cache

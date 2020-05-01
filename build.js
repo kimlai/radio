@@ -27,7 +27,7 @@ const fields = ["artist", "title", "source", "cover"];
 const customFormatToObject = lines =>
   lines.reduce((acc, line, i) => {
     if (fields[i] === "cover") {
-      return R.assoc(fields[i], "/public/covers/" + line, acc);
+      return R.assoc(fields[i], "/covers/" + line, acc);
     }
     return R.assoc(fields[i], line, acc);
   }, {});
@@ -54,9 +54,7 @@ const paginate = tracks => {
   return pages.map((pageTracks, i) => ({
     tracks: pageTracks,
     next_href:
-      pages.length === i + 1
-        ? null
-        : "/public/json/tracks/page_" + (i + 2) + ".json"
+      pages.length === i + 1 ? null : "/json/tracks/page_" + (i + 2) + ".json"
   }));
 };
 
@@ -103,10 +101,10 @@ const res = R.pipe(
       R.map(paginate),
       playlists =>
         playlists.map((playlist, i) =>
-          writeJSONFiles("public/json/playlists/" + i + "/page_")(playlist)
+          writeJSONFiles("static/json/playlists/" + i + "/page_")(playlist)
         )
     )
   ),
   paginate,
-  writeJSONFiles("public/json/tracks/page_")
+  writeJSONFiles("static/json/tracks/page_")
 )(contents);

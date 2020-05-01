@@ -34,13 +34,13 @@ init : Int -> Url -> Nav.Key -> ( Radio.Model.Model, Cmd Msg )
 init playlistId url key =
     let
         playlistUrl =
-            "/public/json/playlists/" ++ String.fromInt playlistId ++ "/page_1.json"
+            "/json/playlists/" ++ String.fromInt playlistId ++ "/page_1.json"
 
         model =
             { tracks = Tracklist.empty
             , radio = Radio.Model.emptyPlaylist Radio playlistUrl
             , showRadioPlaylist = False
-            , latestTracks = Radio.Model.emptyPlaylist LatestTracks "/public/json/tracks/page_1.json"
+            , latestTracks = Radio.Model.emptyPlaylist LatestTracks "/json/tracks/page_1.json"
             , played = []
             , playing = False
             , currentPage = Radio.Router.urlToPage url
