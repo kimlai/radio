@@ -4,7 +4,7 @@
   "description": "A music webradio",
   "scripts": {
     "deploy": "npm run api:build && npm run elm:build",
-    "elm:build": "cd elm && elm make src/Radio/Main.elm --output ../public/js/radio.js",
+    "elm:build": "cd elm && elm make --optimize src/Radio/Main.elm --output ../public/js/radio.js",
     "api:build": "node build.js"
   },
   "devDependencies": {
