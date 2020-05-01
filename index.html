@@ -27,9 +27,7 @@
     <script src="/public/js/radio.js"></script>
   </head>
   <body>
-    <div hidden id="youtube-player">
-      <div id="player"></div>
-    </div>
+    <div id="radio"></div>
     <script>
       var tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
@@ -38,6 +36,7 @@
 
       function onYouTubeIframeAPIReady() {
         var app = Elm.Main.init({
+          node: document.getElementById("radio"),
           flags: Math.floor(Math.random() * 29)
         });
         app = initializePlayer("cc1bf58dc4b00ed757ab2f76deaa3d70", app);

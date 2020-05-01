@@ -81,6 +81,9 @@ view model =
         , div
             [ class "personal-website-link" ]
             [ span [] [ text "a website by " ], a [ href "https://kimlaitrinh.me" ] [ text "Kim Laï" ] ]
+        , div
+            [ attribute "hidden" "true", attribute "id" "youtube-player" ]
+            [ div [ attribute "id" "player" ] [] ]
         ]
     }
 
