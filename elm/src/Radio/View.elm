@@ -355,9 +355,6 @@ viewTrackPlaceHolder =
             [ div
                 [ class "cover" ]
                 [ img [ src "/images/placeholder.jpg", alt "" ] [] ]
-            , div
-                [ class "progress-bar" ]
-                [ div [ class "outer" ] [] ]
             ]
         ]
 
