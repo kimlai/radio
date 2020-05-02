@@ -31,7 +31,7 @@ view model =
             , div
                 [ class "main" ]
                 [ node "center-l"
-                    [ attribute "gutters" "var(--s1)", attribute "intrinsic" "true" ]
+                    [ attribute "gutters" "var(--s1)" ]
                     [ case model.currentPage of
                         RadioPage ->
                             let
@@ -104,36 +104,39 @@ viewRadioTrack maybeTrack currentPlaylist =
                         Youtube id ->
                             "Youtube"
             in
-            div
-                [ classList [ ( "radio-track", True ), ( "inactive", currentPlaylist /= Just Radio ) ] ]
+            node "center-l"
+                [ attribute "intrinsic" "true" ]
                 [ div
-                    [ class "radio-cover" ]
-                    [ img [ class "cover", src track.artwork_url, alt "" ] [] ]
-                , div [ class "track-info" ]
-                    [ h1 [ class "title" ] [ text track.title ]
-                    , div [ class "artist" ] [ text ("by " ++ track.artist) ]
-                    , div
-                        [ class "source" ]
-                        [ span [] [ text "on " ]
-                        , a
-                            [ href track.sourceUrl
-                            , target "_blank"
+                    [ classList [ ( "radio-track", True ), ( "inactive", currentPlaylist /= Just Radio ) ] ]
+                    [ div
+                        [ class "radio-cover" ]
+                        [ img [ class "cover", src track.artwork_url, alt "" ] [] ]
+                    , div [ class "track-info" ]
+                        [ h1 [ class "title" ] [ text track.title ]
+                        , div [ class "artist" ] [ text ("by " ++ track.artist) ]
+                        , div
+                            [ class "source" ]
+                            [ span [] [ text "on " ]
+                            , a
+                                [ href track.sourceUrl
+                                , target "_blank"
+                                ]
+                                [ text source ]
                             ]
-                            [ text source ]
                         ]
-                    ]
-                , if currentPlaylist /= Just Radio then
-                    node "imposter-l"
-                        []
-                        [ button
-                            [ class "resume-radio"
-                            , onClick ResumeRadio
+                    , if currentPlaylist /= Just Radio then
+                        node "imposter-l"
+                            []
+                            [ button
+                                [ class "resume-radio"
+                                , onClick ResumeRadio
+                                ]
+                                [ text "Launch Radio" ]
                             ]
-                            [ text "Launch Radio" ]
-                        ]
 
-                  else
-                    div [] []
+                      else
+                        div [] []
+                    ]
                 ]
 
 
