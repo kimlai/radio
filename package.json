@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "A music webradio",
   "scripts": {
-    "deploy": "npm run api:build && npm run parcel:build",
+    "deploy": "npm run api:build  && npm run images:build && npm run parcel:build",
     "parcel:build": "parcel build index.html",
-    "api:build": "node build.js",
+    "api:build": "node build",
+    "images:build": "node build/images.js",
     "start": "parcel index.html"
   },
   "devDependencies": {
@@ -13,7 +14,8 @@
     "elm-hot": "^1.1.4",
     "node-elm-compiler": "^5.0.4",
     "parcel-bundler": "^1.12.4",
-    "ramda": "^0.27.0"
+    "ramda": "^0.27.0",
+    "sharp": "^0.25.2"
   },
   "repository": {
     "type": "git",

@@ -180,6 +180,9 @@ ul.latest-tracks {
   grid-template-columns: repeat(auto-fill, minmax(var(--s7), 1fr));
   grid-gap: var(--s3);
 }
+.latest-track {
+  width: 100%;
+}
 .latest-track .track-info {
   padding: var(--s-2);
 }
