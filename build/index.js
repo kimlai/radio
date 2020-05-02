@@ -49,12 +49,14 @@ const addStreamingInfo = track => {
   throw new Error("Source non reconnue");
 };
 
-const paginate = tracks => {
+const paginate = folder => tracks => {
   const pages = R.splitEvery(PAGE_SIZE, tracks);
   return pages.map((pageTracks, i) => ({
     tracks: pageTracks,
     next_href:
-      pages.length === i + 1 ? null : "/json/tracks/page_" + (i + 2) + ".json"
+      pages.length === i + 1
+        ? null
+        : "/json/" + folder + "/page_" + (i + 2) + ".json"
   }));
 };
 
@@ -98,13 +100,14 @@ const res = R.pipe(
   R.tap(
     R.pipe(
       buildPlaylists,
-      R.map(paginate),
+      playlists =>
+        playlists.map((playlist, i) => paginate("playlists/" + i)(playlist)),
       playlists =>
         playlists.map((playlist, i) =>
           writeJSONFiles("static/json/playlists/" + i + "/page_")(playlist)
         )
     )
   ),
-  paginate,
+  paginate("tracks"),
   writeJSONFiles("static/json/tracks/page_")
 )(contents);
