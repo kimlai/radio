@@ -209,6 +209,7 @@ ul.latest-tracks {
 .latest-tracks img:hover {
   filter: grayscale(0) brightness(1.3);
   cursor: pointer;
+  outline: dashed;
 }
 
 .queue-tracks .cover img {
