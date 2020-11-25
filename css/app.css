@@ -26,6 +26,11 @@
   --line-height-small: calc(0.8 * var(--ratio));
 }
 
+ul {
+  padding: 0;
+  list-style: none;
+}
+
 button {
   border: none;
 }
