@@ -179,6 +179,11 @@ header {
   background: black;
 }
 
+.latest-tracks-page {
+  --measure: 110ch;
+  padding-bottom: var(--s3);
+}
+
 ul.latest-tracks {
   padding-top: var(--s2);
   display: grid;

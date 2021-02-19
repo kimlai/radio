@@ -29,7 +29,7 @@ view model =
                     (Player.getCurrentPlaylist model.player)
                 ]
             , div
-                [ class "main" ]
+                [ class ("main " ++ mainClass model.currentPage) ]
                 [ node "center-l"
                     [ attribute "gutters" "var(--s1)" ]
                     [ case model.currentPage of
@@ -86,6 +86,16 @@ view model =
             [ div [ attribute "id" "player" ] [] ]
         ]
     }
+
+
+mainClass : Page -> String
+mainClass page =
+    case page of
+        LatestTracksPage ->
+            "latest-tracks-page"
+
+        _ ->
+            ""
 
 
 viewRadioTrack : Maybe Track -> Maybe PlaylistId -> Html Msg
