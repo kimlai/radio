@@ -1,3 +1,5 @@
+@import "/node_modules/modern-css-reset/dist/reset.css";
+@import "../layout-components/Center.css";
 @import "../layout-components/Center.css";
 @import "../layout-components/Cluster.css";
 @import "../layout-components/Cover.css";
