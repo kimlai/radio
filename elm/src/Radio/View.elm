@@ -120,7 +120,7 @@ viewRadioTrack maybeTrack currentPlaylist =
                     [ classList [ ( "radio-track", True ), ( "inactive", currentPlaylist /= Just Radio ) ] ]
                     [ div
                         [ class "radio-cover" ]
-                        [ img [ class "cover", src track.artwork_url, alt "" ] [] ]
+                        [ img [ width 400, height 400, class "cover", src track.artwork_url, alt "" ] [] ]
                     , div [ class "track-info" ]
                         [ h1 [ class "title" ] [ text track.title ]
                         , div [ class "artist" ] [ text ("by " ++ track.artist) ]
@@ -196,7 +196,7 @@ viewPlayedTrack track =
             [ div []
                 [ div
                     [ class "cover" ]
-                    [ img [ src track.artwork_url, alt "" ] [] ]
+                    [ img [ width 400, height 400, src track.artwork_url, alt "" ] [] ]
                 , div []
                     [ div [ class "title" ] [ text track.title ]
                     , div [ class "artist" ] [ text track.artist ]
@@ -244,7 +244,7 @@ viewUpcomingTrack playlistId ( position, track ) =
             [ div []
                 [ div
                     [ class "cover" ]
-                    [ img [ src track.artwork_url, alt "" ] [] ]
+                    [ img [ width 400, height 400, src track.artwork_url, alt "" ] [] ]
                 , div []
                     [ div [ class "title" ] [ text track.title ]
                     , div [ class "artist" ] [ text track.artist ]
@@ -266,7 +266,7 @@ viewRadioPlaylistTrack currentTrackId position track =
         ]
         [ div
             [ class "cover" ]
-            [ img [ src track.artwork_url, alt "" ] [] ]
+            [ img [ width 400, height 400, src track.artwork_url, alt "" ] [] ]
         , div
             []
             [ div
@@ -335,7 +335,7 @@ viewTrack currentTrackId playlistId position track =
                 [ class "cover"
                 , onClick (PlayFromPlaylist playlistId position)
                 ]
-                [ img [ src track.artwork_url, alt "" ] [] ]
+                [ img [ width 400, height 400, src track.artwork_url, alt "" ] [] ]
             , div
                 [ class "track-info" ]
                 [ node "stack-l"
@@ -364,7 +364,7 @@ viewTrackPlaceHolder =
             [ class "track-info-container" ]
             [ div
                 [ class "cover" ]
-                [ img [ src "/images/placeholder.jpg", alt "" ] [] ]
+                [ img [ width 400, height 400, src "/images/placeholder.jpg", alt "" ] [] ]
             ]
         ]
 

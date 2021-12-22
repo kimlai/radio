@@ -104,6 +104,9 @@ header {
   width: 100%;
   height: 100%;
 }
+.radio-cover img {
+  height: auto;
+}
 
 .radio-track .artist {
   font-size: var(--s1);

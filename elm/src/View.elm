@@ -57,7 +57,7 @@ viewGlobalPlayer tooglePlayback next seekTo maybeTrack playing hideTrack =
                             div [ class "track" ]
                                 [ div [ class "cover" ]
                                     [ img
-                                        [ src track.artwork_url, alt "" ]
+                                        [ width 400, height 400, src track.artwork_url, alt "" ]
                                         []
                                     ]
                                 , div
