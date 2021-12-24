@@ -10,6 +10,13 @@
   </head>
   <body>
     <div id="radio"></div>
-    <script></script>
+    <script>
+      const playlistId = Math.floor(Math.random() * 29);
+      const link = document.createElement("link");
+      link.setAttribute("rel", "preload");
+      link.setAttribute("as", "fetch");
+      link.setAttribute("href", `/json/playlists/${playlistId}/page_1.json`);
+      document.head.appendChild(link);
+    </script>
   </body>
 </html>

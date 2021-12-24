@@ -14,7 +14,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var app = Elm.Main.init({
   node: document.getElementById("radio"),
-  flags: Math.floor(Math.random() * 29)
+  flags: window.playlistId
 });
 
 window.onYouTubeIframeAPIReady = function() {
