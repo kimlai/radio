@@ -11,7 +11,7 @@
   <body>
     <div id="radio"></div>
     <script>
-      const playlistId = Math.floor(Math.random() * 29);
+      window.playlistId = Math.floor(Math.random() * 29);
       const link = document.createElement("link");
       link.setAttribute("rel", "preload");
       link.setAttribute("as", "fetch");
