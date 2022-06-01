@@ -16,7 +16,7 @@
     "node-elm-compiler": "^5.0.4",
     "parcel-bundler": "^1.12.4",
     "ramda": "^0.27.0",
-    "sharp": "^0.25.2"
+    "sharp": "^0.30.5"
   },
   "repository": {
     "type": "git",
