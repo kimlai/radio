@@ -30,6 +30,6 @@
   "homepage": "https://radio.kimlaitrinh.me",
   "dependencies": {
     "parcel-plugin-static-files-copy": "^2.3.1",
-    "terser": "^4.6.12"
+    "terser": "^4.8.1"
   }
 }
